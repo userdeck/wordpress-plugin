@@ -34,7 +34,7 @@ class UserDeck {
 		add_action( 'admin_menu', array( $this, 'create_options_page') );
 		add_action( 'admin_init', array( $this, 'settings_init') );
 		add_action( 'admin_notices', array( $this, 'notice') );
-		add_shortcode( 'userdeck_kb', array( $this, 'output_knowledgebase_code') );
+		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
 		
 	}
 	
@@ -59,6 +59,23 @@ class UserDeck {
 
 	}
 	
+	public function parse_shortcode( $attrs ) {
+		
+		if (!isset($attrs['widget'])) {
+			?>
+			<strong>Error:</strong> Missing widget attribute in shortcode for UserDeck widget.
+			<?php
+			return;
+		}
+		
+		$widget = $attrs['widget'];
+		
+		if ($widget == 'kb') {
+			$this->output_knowledgebase_code();
+		}
+	}
+	
+	
 	/**
 	 * output the userdeck feedback javascript install code
 	 * @return null
@@ -71,7 +88,7 @@ class UserDeck {
 		$helpdesk_id = $options['helpdesk_id'];
 		
 		?>
-		
+
 		<script type="text/javascript">
 			(function() {
 				var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true; f.id = 'feedbackapp';
