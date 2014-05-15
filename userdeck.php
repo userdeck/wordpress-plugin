@@ -53,7 +53,7 @@ class UserDeck {
 	 * @param  array $options new options settings to save
 	 * @return null
 	 */
-	function update_settings( $options ) {
+	public function update_settings( $options ) {
 
 		update_option( 'userdeck', $options );
 
@@ -251,7 +251,7 @@ class UserDeck {
 	 * @param  array $input options to validate
 	 * @return array        validated options
 	 */
-	function validate_settings( $input ) {
+	public function validate_settings( $input ) {
 
 		$new['helpdesk_id'] = wp_kses( trim( $input['helpdesk_id'] ), array() );
 
