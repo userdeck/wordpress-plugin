@@ -179,8 +179,6 @@ class UserDeck {
 		
 		$options = self::get_settings();
 		
-		$action = 'options.php';
-		
 		?>
 		
 		<div class="wrap">
@@ -190,7 +188,7 @@ class UserDeck {
 			
 			<div class="postbox-container" style="width:65%;">
 
-				<form method="post" action="<?php echo $action; ?>">
+				<form method="post" action="options.php">
 
 					<?php settings_fields( 'userdeck' ); ?>
 
