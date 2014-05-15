@@ -70,15 +70,17 @@ class UserDeck {
 		
 		$helpdesk_id = $options['helpdesk_id'];
 		
-		$out = '<script type="text/javascript">';
-		$out .= '	(function() {';
-		$out .= '		var f = document.createElement(\'script\'); f.type = \'text/javascript\'; f.async = true; f.id = \'feedbackapp\';';
-		$out .= '		f.src = \'http://userdeck.com/assets/bundles/helpdesk/feedback.js?id=' . $helpdesk_id . '\';';
-		$out .= '		var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(f, s);';
-		$out .= '	})();';
-		$out .= '</script>';
+		?>
 		
-		echo $out;
+		<script type="text/javascript">
+			(function() {
+				var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true; f.id = 'feedbackapp';
+				f.src = 'http://userdeck.com/assets/bundles/helpdesk/feedback.js?id=<?php echo $helpdesk_id ?>';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
+			})();
+		</script>
+		
+		<?php
 		
 	}
 	
@@ -93,15 +95,17 @@ class UserDeck {
 		
 		$helpdesk_id = $options['helpdesk_id'];
 		
-		$out = '<div id="kbapp"></div>';
-		$out .= '<script type="text/javascript">';
-		$out .= '	var KBAppOptions = {id : "' . $helpdesk_id . '"};';
-		$out .= '	document.write(\'\x3Cscript type="text/javascript" src="\'';
-		$out .= '	+ \'http://userdeck.com/assets/bundles/helpdesk/kb.js\'';
-		$out .= '	+ \'">\x3C/script>\');';
-		$out .= '</script>';
+		?>
 		
-		echo $out;
+		<div id="kbapp"></div>
+		<script type="text/javascript">
+			var KBAppOptions = {id : "<?php echo $helpdesk_id ?>"};
+			document.write('\x3Cscript type="text/javascript" src="'
+			+ 'http://userdeck.com/assets/bundles/helpdesk/kb.js'
+			+ '">\x3C/script>');
+		</script>
+		
+		<?php
 		
 	}
 	
