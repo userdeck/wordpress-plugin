@@ -227,7 +227,7 @@ class UserDeck {
 	 */
 	public function settings_init() {
 		
-		register_setting( 'userdeck', 'userdeck', array( $this, 'validate' ) );
+		register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
 		if ( isset( $_REQUEST['_wpnonce'] ) and wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
 
 			$file = 'options-general.php';
@@ -251,7 +251,7 @@ class UserDeck {
 	 * @param  array $input options to validate
 	 * @return array        validated options
 	 */
-	function validate( $input ) {
+	function validate_settings( $input ) {
 
 		$new['helpdesk_id'] = wp_kses( trim( $input['helpdesk_id'] ), array() );
 
