@@ -184,7 +184,7 @@ class UserDeck {
 		<div class="wrap">
 		
 			<?php screen_icon( 'options-general' ); ?>
-			<h2>UserDeck Configuration</h2>
+			<h2>UserDeck Settings</h2>
 			
 			<div class="postbox-container" style="width:65%;">
 
