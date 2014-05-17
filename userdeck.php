@@ -253,9 +253,9 @@ class UserDeck {
 	 */
 	public function validate_settings( $input ) {
 
-		$new['helpdesk_id'] = wp_kses( trim( $input['helpdesk_id'] ), array() );
+		$input['helpdesk_id'] = wp_kses( trim( $input['helpdesk_id'] ), array() );
 
-		return $new;
+		return $input;
 
 	}
 	
