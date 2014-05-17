@@ -36,7 +36,7 @@ class UserDeck {
 		add_action( 'wp_footer', array( $this, 'output_feedback_code' ) );
 		add_action( 'admin_menu', array( $this, 'create_options_page') );
 		add_action( 'admin_init', array( $this, 'settings_init') );
-		add_action( 'admin_notices', array( $this, 'notice') );
+		add_action( 'admin_notices', array( $this, 'admin_notice') );
 		
 		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
 		
@@ -146,7 +146,7 @@ class UserDeck {
 	 * and a friendly reminder if the app ID or secret key haven't been entered
 	 * @return null
 	 */
-	function notice() {
+	public function admin_notice() {
 
 		// show a reminder to users who can update options
 
