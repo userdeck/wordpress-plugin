@@ -145,15 +145,6 @@ class UserDeck {
 	 */
 	function notice() {
 
-		if ( isset( $_GET['page'] ) and ( 'userdeck' == $_GET['page'] ) ) {
-
-			if ( isset( $_GET['updated'] ) ) { ?>
-				<div class="updated" id="userdeck-updated"><p><strong><?php _e( 'Settings saved.' ); ?></strong></p></div>
-				<?php
-			}
-
-		}
-
 		// show a reminder to users who can update options
 
 		if ( ! current_user_can( 'manage_options' ) )
