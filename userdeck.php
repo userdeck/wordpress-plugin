@@ -40,6 +40,9 @@ class UserDeck {
 		
 		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
 		
+		$plugin = plugin_basename(__FILE__);
+		add_filter("plugin_action_links_$plugin", array(&$this, 'add_action_links'));
+		
 	}
 	
 	public function install() {}
@@ -258,6 +261,16 @@ class UserDeck {
 
 		return $input;
 
+	}
+	
+	public function add_action_links( $links ) {
+		
+		$settings_link = '<a href="options-general.php?page=userdeck">Settings</a>';
+		
+		array_unshift( $links, $settings_link );
+		
+		return $links;
+		
 	}
 	
 } // class
