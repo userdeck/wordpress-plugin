@@ -41,7 +41,7 @@ class UserDeck {
 		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
 		
 		$plugin = plugin_basename(__FILE__);
-		add_filter("plugin_action_links_$plugin", array(&$this, 'add_action_links'));
+		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
 		
 	}
 	
@@ -98,7 +98,7 @@ class UserDeck {
 	public function output_feedback_code() {
 		
 		// retrieve the options
-		$options = self::get_settings();
+		$options = $this->get_settings();
 		
 		$helpdesk_id = $options['helpdesk_id'];
 		
@@ -123,7 +123,7 @@ class UserDeck {
 	public function output_knowledgebase_code() {
 		
 		// retrieve the options
-		$options = self::get_settings();
+		$options = $this->get_settings();
 		
 		$helpdesk_id = $options['helpdesk_id'];
 		
@@ -153,7 +153,7 @@ class UserDeck {
 		if ( ! current_user_can( 'manage_options' ) )
 			return;
 
-		$options = self::get_settings();
+		$options = $this->get_settings();
 
 		if ( !isset( $options['helpdesk_id'] ) or !$options['helpdesk_id'] ) {
 			echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck needs some attention</strong>. ';
@@ -183,7 +183,7 @@ class UserDeck {
 	 */
 	public function render_options_page() {
 		
-		$options = self::get_settings();
+		$options = $this->get_settings();
 		
 		?>
 		
@@ -240,8 +240,8 @@ class UserDeck {
 		if ( isset( $_REQUEST['_wpnonce'] ) and wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
 
 			if ( isset( $_POST['userdeck-submit'] ) ) {
-				$options = self::validate_settings( $_POST['userdeck'] );
-				self::update_settings( $options );
+				$options = $this->validate_settings( $_POST['userdeck'] );
+				$this->update_settings( $options );
 				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => true), 'options-general.php' ) );
 				exit;
 			}
