@@ -189,6 +189,9 @@ class UserDeck {
 			<?php screen_icon( 'options-general' ); ?>
 			<h2>UserDeck Settings</h2>
 			
+			An account at <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">UserDeck</a> is required to use the plugin.
+			You can <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">create a new account</a> for free if you don't have one.
+			
 			<div class="postbox-container" style="width:65%;">
 
 				<form method="post" action="options.php">
