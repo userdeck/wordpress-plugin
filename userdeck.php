@@ -230,16 +230,11 @@ class UserDeck {
 		register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
 		if ( isset( $_REQUEST['_wpnonce'] ) and wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
 
-			$file = 'options-general.php';
-
 			if ( isset( $_POST['userdeck-submit'] ) ) {
 				$options = self::validate( $_POST['userdeck'] );
 				self::update_settings( $options );
-				wp_redirect( add_query_arg( array(
-					'page'    => 'userdeck',
-					'updated' => true
-					), $file ) );
-				die();
+				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => true), 'options-general.php' ) );
+				exit;
 			}
 
 		}
