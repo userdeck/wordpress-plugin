@@ -243,7 +243,7 @@ class UserDeck {
 		if ( isset( $_REQUEST['_wpnonce'] ) and wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
 
 			if ( isset( $_POST['userdeck-submit'] ) ) {
-				$options = self::validate( $_POST['userdeck'] );
+				$options = self::validate_settings( $_POST['userdeck'] );
 				self::update_settings( $options );
 				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => true), 'options-general.php' ) );
 				exit;
