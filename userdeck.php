@@ -168,7 +168,7 @@ class UserDeck {
 			} else {
 				echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
 			}
-			echo ' to start tracking your users.</p></div>' . "\n";
+			echo ' to using the plugin.</p></div>' . "\n";
 		}
 
 	}
