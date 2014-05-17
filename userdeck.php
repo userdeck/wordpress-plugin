@@ -30,11 +30,23 @@ class UserDeck {
 	 */
 	public function __construct() {
 		
+		register_activation_hook( __FILE__, array( $this, 'install' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
+		
 		add_action( 'wp_footer', array( $this, 'output_feedback_code' ) );
 		add_action( 'admin_menu', array( $this, 'create_options_page') );
 		add_action( 'admin_init', array( $this, 'settings_init') );
 		add_action( 'admin_notices', array( $this, 'notice') );
+		
 		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
+		
+	}
+	
+	public function install() {}
+	
+	public function uninstall() {
+		
+		delete_option('userdeck');
 		
 	}
 	
