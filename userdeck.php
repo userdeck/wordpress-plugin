@@ -252,7 +252,7 @@ class UserDeck {
 			if ( isset( $_POST['userdeck-submit'] ) ) {
 				$options = $this->validate_settings( $_POST['userdeck'] );
 				$this->update_settings( $options );
-				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => true), 'options-general.php' ) );
+				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => 1), 'options-general.php' ) );
 				exit;
 			}
 
