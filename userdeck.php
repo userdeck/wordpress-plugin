@@ -247,15 +247,14 @@ class UserDeck {
 	public function settings_init() {
 		
 		register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
-		if ( isset( $_REQUEST['_wpnonce'] ) and wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
-
-			if ( isset( $_POST['userdeck-submit'] ) ) {
+		
+		if ( isset( $_POST['userdeck-submit'] ) ) {
+			if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
 				$options = $this->validate_settings( $_POST['userdeck'] );
 				$this->update_settings( $options );
 				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => 1), 'options-general.php' ) );
 				exit;
 			}
-
 		}
 		
 	}
