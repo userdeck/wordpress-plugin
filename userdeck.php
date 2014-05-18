@@ -124,6 +124,25 @@ class UserDeck {
 		
 	}
 	
+	public function generate_kb_shortcode() {
+		
+		// retrieve the options
+		$options = $this->get_settings();
+		
+		$helpdesk_id = $options['helpdesk_id'];
+		
+		return '[userdeck_kb]';
+		
+	}
+	
+	public function output_kb_shortcode() {
+		
+		?>
+		<input type="text" onfocus="this.select()" readonly="readonly" value="<?php echo $this->generate_kb_shortcode() ?>" class="code" style="width: 150px;" />
+		<?php
+		
+	}
+	
 	/**
 	 * show a 'settings saved' notice
 	 * and a friendly reminder if the app ID or secret key haven't been entered
@@ -203,6 +222,14 @@ class UserDeck {
 					</p>
 					
 				</form>
+				
+				<h2>Knowledge Base</h2>
+				
+				<h3>Shortcode</h3>
+				
+				<p>You can copy the shortcode to any of your pages or posts you want to add a knowledge base to.</p>
+				
+				<?php $this->output_kb_shortcode() ?>
 				
 			</div>
 			
