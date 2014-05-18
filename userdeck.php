@@ -172,19 +172,19 @@ class UserDeck {
 
 		// show a reminder to users who can update options
 
-		if ( ! current_user_can( 'manage_options' ) )
-			return;
+		if ( current_user_can( 'manage_options' ) ) {
 
-		$options = $this->get_settings();
+			$options = $this->get_settings();
 
-		if ( !isset( $options['helpdesk_id'] ) || !$options['helpdesk_id'] ) {
-			echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck is not setup</strong>. ';
-			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
-				echo 'Please enter your UserDeck helpdesk ID';
-			} else {
-				echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
+			if ( !isset( $options['helpdesk_id'] ) || !$options['helpdesk_id'] ) {
+				echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck is not setup</strong>. ';
+				if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
+					echo 'Please enter your UserDeck helpdesk ID';
+				} else {
+					echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
+				}
+				echo ' to use the plugin.</p></div>' . "\n";
 			}
-			echo ' to use the plugin.</p></div>' . "\n";
 		}
 
 	}
