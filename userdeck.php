@@ -234,9 +234,11 @@ class UserDeck {
 						<tbody>
 
 							<tr valign="top">
-								<th scope="row">HelpDesk ID</th>
+								<th scope="row">
+									<label for="userdesk-helpdesk-id">HelpDesk ID</label>
+								</th>
 								<td>
-									<input name="userdeck[helpdesk_id]" type="text" value="<?php echo esc_attr( $options['helpdesk_id'] ); ?>">
+									<input name="userdeck[helpdesk_id]" type="text" value="<?php echo esc_attr( $options['helpdesk_id'] ); ?>" id="userdesk-helpdesk-id" />
 								</td>
 							</tr>
 
@@ -245,7 +247,7 @@ class UserDeck {
 					</table>
 					
 					<p class="submit">
-						<input class="button-primary" name="userdeck-submit" type="submit" value="Save Settings">
+						<input class="button-primary" name="userdeck-submit" type="submit" value="Save Settings" />
 					</p>
 					
 				</form>
@@ -271,10 +273,12 @@ class UserDeck {
 							<tbody>
 
 								<tr valign="top">
-									<th scope="row">Page Title</th>
+									<th scope="row">
+										<label for="page-title">Page Title</label>
+									</th>
 									<td>
-										<input name="page_title" type="text" value="" />
-										<input class="button-secondary" name="userdeck-page-create" type="submit" value="Create page" />
+										<input name="page_title" type="text" value="" id="page-title" />
+										<input class="button-secondary" name="userdeck-page-create" type="submit" value="Create Page" />
 									</td>
 								</tr>
 
@@ -299,9 +303,11 @@ class UserDeck {
 								<tbody>
 
 									<tr valign="top">
-										<th scope="row">Page Title</th>
+										<th scope="row">
+											<label for="page-id">Page Title</label>
+										</th>
 										<td>
-											<select name="page_id">
+											<select name="page_id" id="page-id">
 												<?php foreach ($pages as $id => $title): ?>
 													<option value="<?php echo $id ?>"><?php echo $title ?></option>
 												<?php endforeach; ?>
