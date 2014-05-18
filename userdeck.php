@@ -149,6 +149,16 @@ class UserDeck {
 	 * @return null
 	 */
 	public function admin_notice() {
+		
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_added'] ) ) {
+			
+			?>
+			<div class="updated">
+				<p>Page created. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
+			</div>
+			<?php
+			
+		}
 
 		// show a reminder to users who can update options
 
@@ -231,6 +241,33 @@ class UserDeck {
 				
 				<?php $this->output_kb_shortcode() ?>
 				
+				<?php if (current_user_can('publish_pages')) : ?>
+					<h3>Create a Page</h3>
+					
+					<p>Creates a new page with the knowledge base shortcode.</p>
+					
+					<form method="post" action="options-general.php?page=userdeck">
+						
+						<?php wp_nonce_field('userdeck-page-create'); ?>
+
+						<table class="form-table">
+							<tbody>
+
+								<tr valign="top">
+									<th scope="row">Page Title</th>
+									<td>
+										<input name="page_title" type="text" value="" />
+										<input class="button-secondary" name="userdeck-page-create" type="submit" value="Create page" />
+									</td>
+								</tr>
+
+							</tbody>
+							
+						</table>
+						
+					</form>
+				<?php endif; ?>
+				
 			</div>
 			
 		</div>
@@ -254,6 +291,27 @@ class UserDeck {
 				$this->update_settings( $options );
 				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => 1), 'options-general.php' ) );
 				exit;
+			}
+		}
+		
+		if (current_user_can('publish_pages')) {
+			if ( isset( $_POST['userdeck-page-create'] ) ) {
+				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-create' ) ) {
+					$page_title = wp_kses( trim( $_POST['page_title'] ), array() );
+					
+					if (!empty($page_title)) {
+						$page_id = wp_insert_post( array(
+							'post_title'     => $page_title,
+							'post_content'   => $this->generate_kb_shortcode(),
+							'post_status'    => 'publish',
+							'post_author'    => get_current_user_id(),
+							'post_type'      => 'page',
+							'comment_status' => 'closed',
+						) );
+						wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+						exit;
+					}
+				}
 			}
 		}
 		
