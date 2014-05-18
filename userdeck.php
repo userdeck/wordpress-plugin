@@ -38,7 +38,7 @@ class UserDeck {
 		add_action( 'admin_init', array( $this, 'settings_init') );
 		add_action( 'admin_notices', array( $this, 'admin_notice') );
 		
-		add_shortcode( 'userdeck', array( $this, 'parse_shortcode') );
+		add_shortcode( 'userdeck_kb', array( $this, 'output_kb_code') );
 		
 		$plugin = plugin_basename(__FILE__);
 		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
@@ -74,23 +74,6 @@ class UserDeck {
 
 	}
 	
-	public function parse_shortcode( $attrs ) {
-		
-		if (!isset($attrs['widget'])) {
-			?>
-			<strong>Error:</strong> Missing widget attribute in shortcode for UserDeck widget.
-			<?php
-			return;
-		}
-		
-		$widget = $attrs['widget'];
-		
-		if ($widget == 'kb') {
-			$this->output_knowledgebase_code();
-		}
-	}
-	
-	
 	/**
 	 * output the userdeck feedback javascript install code
 	 * @return null
@@ -120,7 +103,7 @@ class UserDeck {
 	 * output the userdeck knowledge base javascript install code
 	 * @return null
 	 */
-	public function output_knowledgebase_code() {
+	public function output_kb_code() {
 		
 		// retrieve the options
 		$options = $this->get_settings();
