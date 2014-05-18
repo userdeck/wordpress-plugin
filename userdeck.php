@@ -159,6 +159,16 @@ class UserDeck {
 			<?php
 			
 		}
+		
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_updated'] ) ) {
+			
+			?>
+			<div class="updated">
+				<p>Page updated. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
+			</div>
+			<?php
+			
+		}
 
 		// show a reminder to users who can update options
 
@@ -196,6 +206,13 @@ class UserDeck {
 	public function render_options_page() {
 		
 		$options = $this->get_settings();
+		
+		$page_list = get_pages(array('post_type' => 'page'));
+		$pages = array();
+		
+		foreach ($page_list as $page) {
+			$pages[$page->ID] = $page->post_title;
+		}
 		
 		?>
 		
@@ -268,6 +285,39 @@ class UserDeck {
 					</form>
 				<?php endif; ?>
 				
+				<?php if (current_user_can('edit_pages')) : ?>
+					<?php if (count($pages) > 0): ?>
+						<h3>Add to Page</h3>
+						
+						<p>Adds the knowledge base shortcode to an existing page.</p>
+						
+						<form method="post" action="options-general.php?page=userdeck">
+							
+							<?php wp_nonce_field('userdeck-page-add'); ?>
+
+							<table class="form-table">
+								<tbody>
+
+									<tr valign="top">
+										<th scope="row">Page Title</th>
+										<td>
+											<select name="page_id">
+												<?php foreach ($pages as $id => $title): ?>
+													<option value="<?php echo $id ?>"><?php echo $title ?></option>
+												<?php endforeach; ?>
+											</select>
+											<input class="button-secondary" name="userdeck-page-add" type="submit" value="Add to Page" />
+										</td>
+									</tr>
+
+								</tbody>
+								
+							</table>
+							
+						</form>
+					<?php endif; ?>
+				<?php endif; ?>
+				
 			</div>
 			
 		</div>
@@ -308,7 +358,30 @@ class UserDeck {
 							'post_type'      => 'page',
 							'comment_status' => 'closed',
 						) );
+						
 						wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+						exit;
+					}
+				}
+			}
+		}
+		
+		if (current_user_can('edit_pages')) {
+			if ( isset( $_POST['userdeck-page-add'] ) ) {
+				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-add' ) ) {
+					$page_id = absint( $_POST['page_id'] );
+					
+					if (!empty($page_id)) {
+						$page = get_post($page_id);
+						$page_content = $page->post_content;
+						$page_content .= "\n" . $this->generate_kb_shortcode();
+						
+						$page_id = wp_update_post( array(
+							'ID'           => $page_id,
+							'post_content' => $page_content,
+						) );
+						
+						wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
 						exit;
 					}
 				}
