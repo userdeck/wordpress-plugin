@@ -177,14 +177,14 @@ class UserDeck {
 
 		$options = $this->get_settings();
 
-		if ( !isset( $options['helpdesk_id'] ) or !$options['helpdesk_id'] ) {
-			echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck needs some attention</strong>. ';
-			if ( isset( $_GET['page'] ) and 'userdeck' == $_GET['page'] ) {
+		if ( !isset( $options['helpdesk_id'] ) || !$options['helpdesk_id'] ) {
+			echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck is not setup</strong>. ';
+			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
 				echo 'Please enter your UserDeck helpdesk ID';
 			} else {
 				echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
 			}
-			echo ' to using the plugin.</p></div>' . "\n";
+			echo ' to use the plugin.</p></div>' . "\n";
 		}
 
 	}
