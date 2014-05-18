@@ -257,7 +257,7 @@ class UserDeck {
 				<?php if (current_user_can('publish_pages')) : ?>
 					<h3>Create a Page</h3>
 					
-					<p>Creates a new page with the knowledge base shortcode.</p>
+					<p>Create a new page with the knowledge base shortcode.</p>
 					
 					<form method="post" action="options-general.php?page=userdeck">
 						
@@ -287,7 +287,7 @@ class UserDeck {
 					<?php if (count($pages) > 0): ?>
 						<h3>Add to Page</h3>
 						
-						<p>Adds the knowledge base shortcode to an existing page.</p>
+						<p>Add the knowledge base shortcode to an existing page.</p>
 						
 						<form method="post" action="options-general.php?page=userdeck">
 							
@@ -320,7 +320,7 @@ class UserDeck {
 				
 				<h3>Copy Shortcode</h3>
 				
-				<p>You can copy the shortcode to any of your pages or posts you want to add a knowledge base to.</p>
+				<p>Copy the knowledge base shortcode to any of your pages or posts.</p>
 				
 				<?php $this->output_kb_shortcode() ?>
 				
