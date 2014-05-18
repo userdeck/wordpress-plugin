@@ -254,12 +254,6 @@ class UserDeck {
 				
 				<h2>Knowledge Base</h2>
 				
-				<h3>Shortcode</h3>
-				
-				<p>You can copy the shortcode to any of your pages or posts you want to add a knowledge base to.</p>
-				
-				<?php $this->output_kb_shortcode() ?>
-				
 				<?php if (current_user_can('publish_pages')) : ?>
 					<h3>Create a Page</h3>
 					
@@ -323,6 +317,12 @@ class UserDeck {
 						</form>
 					<?php endif; ?>
 				<?php endif; ?>
+				
+				<h3>Copy Shortcode</h3>
+				
+				<p>You can copy the shortcode to any of your pages or posts you want to add a knowledge base to.</p>
+				
+				<?php $this->output_kb_shortcode() ?>
 				
 			</div>
 			
