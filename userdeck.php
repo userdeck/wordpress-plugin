@@ -422,6 +422,12 @@ class UserDeck {
 		
 	}
 	
-} // class
+}
 
-add_action( 'init', array( 'UserDeck', 'get_instance' ) );
+function userdeck_init() {
+	global $userdeck;
+	
+	$userdeck = new UserDeck();
+}
+
+add_action( 'init', 'userdeck_init', 0 );
