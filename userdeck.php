@@ -220,115 +220,119 @@ class UserDeck {
 		?>
 		
 		<div class="wrap">
-		
 			<?php screen_icon( 'options-general' ); ?>
-			<h2>UserDeck Settings</h2>
+			<h2>UserDeck</h2>
 			
 			<p>An account at <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">UserDeck</a> is required to use the plugin.
 			You can <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">create a new account</a> for free if you don't have one.</p>
 			
-			<div class="postbox-container" style="width:65%;">
-
-				<form method="post" action="options.php">
-
-					<?php settings_fields( 'userdeck' ); ?>
-
-					<table class="form-table">
-						<tbody>
-
-							<tr valign="top">
-								<th scope="row">
-									<label for="userdesk-helpdesk-id">HelpDesk ID</label>
-								</th>
-								<td>
-									<input name="userdeck[helpdesk_id]" type="text" value="<?php echo esc_attr( $options['helpdesk_id'] ); ?>" id="userdesk-helpdesk-id" />
-								</td>
-							</tr>
-
-						</tbody>
-						
-					</table>
-					
-					<p class="submit">
-						<input class="button-primary" name="userdeck-submit" type="submit" value="Save Settings" />
-					</p>
-					
-				</form>
-				
-				<h2>Knowledge Base</h2>
-				
-				<?php if (current_user_can('publish_pages')) : ?>
-					<h3>Create a Page</h3>
-					
-					<p>Create a new page with the knowledge base shortcode.</p>
-					
-					<form method="post" action="options-general.php?page=userdeck">
-						
-						<?php wp_nonce_field('userdeck-page-create'); ?>
-
-						<table class="form-table">
-							<tbody>
-
-								<tr valign="top">
-									<th scope="row">
-										<label for="page-title">Page Title</label>
-									</th>
-									<td>
-										<input name="page_title" type="text" value="" id="page-title" />
-										<input class="button-secondary" name="userdeck-page-create" type="submit" value="Create Page" />
-									</td>
-								</tr>
-
-							</tbody>
+			<div id="poststuff">
+				<div class="postbox-container" style="width:65%;">
+					<form method="post" action="options.php">
+						<div class="postbox">
+							<h3 class="hndle" style="cursor: auto;"><span>Settings</span></h3>
 							
-						</table>
-						
-					</form>
-				<?php endif; ?>
-				
-				<?php if (current_user_can('edit_pages')) : ?>
-					<?php if (count($pages) > 0): ?>
-						<h3>Add to Page</h3>
-						
-						<p>Add the knowledge base shortcode to an existing page.</p>
-						
-						<form method="post" action="options-general.php?page=userdeck">
-							
-							<?php wp_nonce_field('userdeck-page-add'); ?>
-
-							<table class="form-table">
-								<tbody>
-
-									<tr valign="top">
-										<th scope="row">
-											<label for="page-id">Page Title</label>
-										</th>
-										<td>
-											<select name="page_id" id="page-id">
-												<?php foreach ($pages as $id => $title): ?>
-													<option value="<?php echo $id ?>"><?php echo $title ?></option>
-												<?php endforeach; ?>
-											</select>
-											<input class="button-secondary" name="userdeck-page-add" type="submit" value="Add to Page" />
-										</td>
-									</tr>
-
-								</tbody>
+							<div class="inside">
+								<table class="form-table">
+									<tbody>
+										<tr valign="top">
+											<th scope="row">
+												<label for="userdesk-helpdesk-id">HelpDesk ID</label>
+											</th>
+											<td>
+												<input name="userdeck[helpdesk_id]" type="text" value="<?php echo esc_attr( $options['helpdesk_id'] ); ?>" id="userdesk-helpdesk-id" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
 								
-							</table>
+								<p>
+									<?php settings_fields( 'userdeck' ); ?>
+									<input class="button-primary" name="userdeck-submit" type="submit" value="Save Settings" />
+								</p>
+							</div>
+						</div>
+					</form>
+					
+					<h2>Knowledge Base</h2>
+					
+					<?php if (current_user_can('publish_pages')) : ?>
+						<div class="postbox">
+							<h3 class="hndle" style="cursor: auto;"><span>Create a Page</span></h3>
 							
-						</form>
+							<div class="inside">
+								<p>Create a new page with the knowledge base shortcode.</p>
+								
+								<form method="post" action="options-general.php?page=userdeck">
+									<table class="form-table">
+										<tbody>
+											<tr valign="top">
+												<th scope="row">
+													<label for="page-title">Page Title</label>
+												</th>
+												<td>
+													<input name="page_title" type="text" value="" id="page-title" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+								
+								<p>
+									<?php wp_nonce_field('userdeck-page-create'); ?>
+									<input class="button-primary" name="userdeck-page-create" type="submit" value="Create Page" />
+								</p>
+							</div>
+						</div>
 					<?php endif; ?>
-				<?php endif; ?>
-				
-				<h3>Copy Shortcode</h3>
-				
-				<p>Copy the knowledge base shortcode to any of your pages or posts.</p>
-				
-				<?php $this->output_kb_shortcode() ?>
-				
+					
+					<?php if (current_user_can('edit_pages')) : ?>
+						<?php if (count($pages) > 0): ?>
+						<div class="postbox">
+							<h3 class="hndle" style="cursor: auto;"><span>Add to Page</span></h3>
+							
+							<div class="inside">
+								<p>Add the knowledge base shortcode to an existing page.</p>
+								
+								<form method="post" action="options-general.php?page=userdeck">
+									<table class="form-table">
+										<tbody>
+											<tr valign="top">
+												<th scope="row">
+													<label for="page-id">Page Title</label>
+												</th>
+												<td>
+													<select name="page_id" id="page-id">
+														<?php foreach ($pages as $id => $title): ?>
+															<option value="<?php echo $id ?>"><?php echo $title ?></option>
+														<?php endforeach; ?>
+													</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+								
+								<p>
+									<?php wp_nonce_field('userdeck-page-add'); ?>
+									<input class="button-primary" name="userdeck-page-add" type="submit" value="Add to Page" />
+								</p>
+							</div>
+						</div>
+						<?php endif; ?>
+					<?php endif; ?>
+					
+					<div class="postbox">
+						<h3 class="hndle" style="cursor: auto;"><span>Copy Shortcode</h3>
+						
+						<div class="inside">
+							<p>Copy the knowledge base shortcode to any of your pages or posts.</p>
+							
+							<?php $this->output_kb_shortcode() ?>
+						</div>
+					</div>
+				</div>
 			</div>
-			
 		</div>
 		
 		<?php
