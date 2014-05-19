@@ -34,9 +34,9 @@ class UserDeck {
 		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
 		
 		if ( is_admin() ) {
-		add_action( 'admin_menu', array( $this, 'create_options_page') );
-		add_action( 'admin_init', array( $this, 'settings_init') );
-		add_action( 'admin_notices', array( $this, 'admin_notice') );
+			add_action( 'admin_menu', array( $this, 'create_options_page') );
+			add_action( 'admin_init', array( $this, 'settings_init') );
+			add_action( 'admin_notices', array( $this, 'admin_notice') );
 		}
 		
 		add_action( 'wp_footer', array( $this, 'output_feedback_code' ) );
@@ -424,4 +424,4 @@ class UserDeck {
 	
 } // class
 
-UserDeck::get_instance();
+add_action( 'init', array( 'UserDeck', 'get_instance' ) );
