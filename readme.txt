@@ -2,7 +2,7 @@
 Contributors: userdeck
 Tags: userdeck, contact form, feedback, knowledge base, support, email
 Requires at least: 3.0.1
-Tested up to: 3.8.1
+Tested up to: 3.9.1
 Stable tag: 0.1
 
 Easily integrate UserDeck's embedded support software into your WordPress site.
