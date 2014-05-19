@@ -12,18 +12,6 @@ defined( 'ABSPATH' ) or die();
 
 class UserDeck {
 	
-	private static $instance = null;
-
-	public static function get_instance() {
-
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
-
-	}
-	
 	/**
 	 * class constructor
 	 * register the activation and de-activation hooks and hook into a bunch of actions
