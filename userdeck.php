@@ -264,12 +264,12 @@ class UserDeck {
 											</tr>
 										</tbody>
 									</table>
+									
+									<p>
+										<?php wp_nonce_field('userdeck-page-create'); ?>
+										<input class="button-primary" name="userdeck-page-create" type="submit" value="Create Page" />
+									</p>
 								</form>
-								
-								<p>
-									<?php wp_nonce_field('userdeck-page-create'); ?>
-									<input class="button-primary" name="userdeck-page-create" type="submit" value="Create Page" />
-								</p>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -299,12 +299,12 @@ class UserDeck {
 											</tr>
 										</tbody>
 									</table>
+									
+									<p>
+										<?php wp_nonce_field('userdeck-page-add'); ?>
+										<input class="button-primary" name="userdeck-page-add" type="submit" value="Add to Page" />
+									</p>
 								</form>
-								
-								<p>
-									<?php wp_nonce_field('userdeck-page-add'); ?>
-									<input class="button-primary" name="userdeck-page-add" type="submit" value="Add to Page" />
-								</p>
 							</div>
 						</div>
 						<?php endif; ?>
