@@ -27,9 +27,7 @@ class UserDeck {
 			add_action( 'admin_notices', array( $this, 'admin_notice') );
 		}
 		
-		add_action( 'wp_footer', array( $this, 'output_feedback_code' ) );
-		
-		add_shortcode( 'userdeck_kb', array( $this, 'output_kb_code') );
+		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
 		
 		$plugin = plugin_basename(__FILE__);
 		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
@@ -50,7 +48,7 @@ class UserDeck {
 	 */
 	public function get_settings() {
 		
-		return get_option( 'userdeck', array('helpdesk_id' => null) );
+		return get_option( 'userdeck', array('guides_key' => null) );
 		
 	}
 
@@ -66,70 +64,40 @@ class UserDeck {
 	}
 	
 	/**
-	 * output the userdeck feedback javascript install code
+	 * output the userdeck guides javascript install code
 	 * @return null
 	 */
-	public function output_feedback_code() {
+	public function output_guides_code() {
 		
 		// retrieve the options
 		$options = $this->get_settings();
 		
-		$helpdesk_id = $options['helpdesk_id'];
+		$guides_key = $options['guides_key'];
 		
 		?>
-
-		<script type="text/javascript">
-			(function() {
-				var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true; f.id = 'feedbackapp';
-				f.src = 'http://userdeck.com/assets/bundles/helpdesk/feedback.js?id=<?php echo $helpdesk_id ?>';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
-			})();
-		</script>
+		
+		<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
+		<script src="//widgets.userdeck.com/guides.js"></script>
 		
 		<?php
 		
 	}
 	
-	/**
-	 * output the userdeck knowledge base javascript install code
-	 * @return null
-	 */
-	public function output_kb_code() {
+	public function generate_guides_shortcode() {
 		
 		// retrieve the options
 		$options = $this->get_settings();
 		
-		$helpdesk_id = $options['helpdesk_id'];
+		$guides_key = $options['guides_key'];
 		
-		?>
-		
-		<div id="kbapp"></div>
-		<script type="text/javascript">
-			var KBAppOptions = {id : "<?php echo $helpdesk_id ?>"};
-			document.write('\x3Cscript type="text/javascript" src="'
-			+ 'http://userdeck.com/assets/bundles/helpdesk/kb.js'
-			+ '">\x3C/script>');
-		</script>
-		
-		<?php
+		return '[userdeck_guides]';
 		
 	}
 	
-	public function generate_kb_shortcode() {
-		
-		// retrieve the options
-		$options = $this->get_settings();
-		
-		$helpdesk_id = $options['helpdesk_id'];
-		
-		return '[userdeck_kb]';
-		
-	}
-	
-	public function output_kb_shortcode() {
+	public function output_guides_shortcode() {
 		
 		?>
-		<input type="text" onfocus="this.select()" readonly="readonly" value="<?php echo $this->generate_kb_shortcode() ?>" class="code" style="width: 150px;" />
+		<input type="text" onfocus="this.select()" readonly="readonly" value="<?php echo $this->generate_guides_shortcode() ?>" class="code" style="width: 150px;" />
 		<?php
 		
 	}
@@ -167,10 +135,10 @@ class UserDeck {
 
 			$options = $this->get_settings();
 
-			if ( !isset( $options['helpdesk_id'] ) || !$options['helpdesk_id'] ) {
+			if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
 				echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck is not setup</strong>. ';
 				if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
-					echo 'Please enter your UserDeck helpdesk ID';
+					echo 'Please enter your UserDeck Guides Key';
 				} else {
 					echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
 				}
@@ -216,6 +184,8 @@ class UserDeck {
 				You can <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">create a new account</a> for free if you don't have one.
 			</p>
 			
+			<h2>Guides</h2>
+			
 			<div id="poststuff">
 				<div class="postbox-container" style="width:65%;">
 					<form method="post" action="options.php">
@@ -227,10 +197,10 @@ class UserDeck {
 									<tbody>
 										<tr valign="top">
 											<th scope="row">
-												<label for="userdesk-helpdesk-id">HelpDesk ID</label>
+												<label for="userdesk-guides-key">Guides Key</label>
 											</th>
 											<td>
-												<input name="userdeck[helpdesk_id]" type="text" value="<?php echo esc_attr( $options['helpdesk_id'] ); ?>" id="userdesk-helpdesk-id" />
+												<input name="userdeck[guides_key]" type="text" value="<?php echo esc_attr( $options['guides_key'] ); ?>" id="userdesk-guides-key" />
 											</td>
 										</tr>
 									</tbody>
@@ -244,15 +214,13 @@ class UserDeck {
 						</div>
 					</form>
 					
-					<h2>Knowledge Base</h2>
-					
 					<?php if (current_user_can('publish_pages')) : ?>
 						<form method="post" action="options-general.php?page=userdeck">
 							<div class="postbox">
 								<h3 class="hndle" style="cursor: auto;"><span>Create a Page</span></h3>
 								
 								<div class="inside">
-									<p>Create a new page with the knowledge base shortcode.</p>
+									<p>Create a new page with the Guides shortcode.</p>
 									
 									<table class="form-table">
 										<tbody>
@@ -283,7 +251,7 @@ class UserDeck {
 									<h3 class="hndle" style="cursor: auto;"><span>Add to Page</span></h3>
 									
 									<div class="inside">
-										<p>Add the knowledge base shortcode to an existing page.</p>
+										<p>Add the Guides shortcode to an existing page.</p>
 										
 										<table class="form-table">
 											<tbody>
@@ -316,9 +284,9 @@ class UserDeck {
 						<h3 class="hndle" style="cursor: auto;"><span>Copy Shortcode</h3>
 						
 						<div class="inside">
-							<p>Copy the knowledge base shortcode to any of your pages or posts.</p>
+							<p>Copy the Guides shortcode to any of your pages or posts.</p>
 							
-							<?php $this->output_kb_shortcode() ?>
+							<?php $this->output_guides_shortcode() ?>
 						</div>
 					</div>
 				</div>
@@ -355,7 +323,7 @@ class UserDeck {
 					if (!empty($page_title)) {
 						$page_id = wp_insert_post( array(
 							'post_title'     => $page_title,
-							'post_content'   => $this->generate_kb_shortcode(),
+							'post_content'   => $this->generate_guides_shortcode(),
 							'post_status'    => 'publish',
 							'post_author'    => get_current_user_id(),
 							'post_type'      => 'page',
@@ -377,7 +345,7 @@ class UserDeck {
 					if (!empty($page_id)) {
 						$page = get_post($page_id);
 						$page_content = $page->post_content;
-						$page_content .= "\n" . $this->generate_kb_shortcode();
+						$page_content .= "\n" . $this->generate_guides_shortcode();
 						
 						$page_id = wp_update_post( array(
 							'ID'           => $page_id,
@@ -400,7 +368,7 @@ class UserDeck {
 	 */
 	public function validate_settings( $input ) {
 
-		$input['helpdesk_id'] = wp_kses( trim( $input['helpdesk_id'] ), array() );
+		$input['guides_key'] = wp_kses( trim( $input['guides_key'] ), array() );
 
 		return $input;
 
