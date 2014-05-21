@@ -181,7 +181,7 @@ class UserDeck {
 			
 			<p>
 				An account at <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">UserDeck</a> is required to use the plugin.
-				You can <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">create a new account</a> for free if you don't have one.
+				You can <a href="http://app.userdeck.com/signup?utm_source=wordpress&utm_medium=link&utm_campaign=app" target="_blank">create a new account</a> for free if you don't have one.
 			</p>
 			
 			<h2>Guides</h2>
