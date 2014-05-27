@@ -131,13 +131,16 @@ class UserDeck {
 			$options = $this->get_settings();
 
 			if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
-				echo '<div class="error" id="userdeck-notice"><p><strong>UserDeck is not setup</strong>. ';
-				if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
-					echo 'Please enter your UserDeck Guides Key';
-				} else {
-					echo 'Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a>';
+				if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
+					?>
+						<div class="error" id="userdeck-notice">
+							<p>
+								<strong>UserDeck is not setup</strong>.
+								Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
+							</p>
+						</div>
+					<?php
 				}
-				echo ' to use the plugin.</p></div>' . "\n";
 			}
 		}
 
@@ -268,12 +271,13 @@ class UserDeck {
 				</div>
 			<?php else: ?>
 				<p>
-					An account at <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">UserDeck</a> is required to use the plugin.
-					Don't have an account? You can <a href="http://app.userdeck.com/signup?utm_source=wordpress&utm_medium=link&utm_campaign=app" target="_blank">create a new account</a> for free.
+					A UserDeck account is required to use the plugin. <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about UserDeck</a>.
 				</p>
+
+				<p>Connect below to login or signup. Don't have an account? You can create a new account for free.</p>
 				
 				<p>
-					<a href="javascript:void(0)" onclick="UserDeck.showConnect()" class="button-primary" id="button-connect">Connect to UserDeck</a>
+					<a href="javascript:void(0)" onclick="UserDeck.showConnect()" class="button button-primary button-hero" id="button-connect">Connect to UserDeck</a>
 				</p>
 
 				<script type="text/javascript">
