@@ -178,7 +178,7 @@ class UserDeck {
 		
 		?>
 		
-		<div class="wrap">
+		<div id="userdeck-wrapper" class="wrap">
 			<?php screen_icon( 'options-general' ); ?>
 			<h2>UserDeck</h2>
 			
@@ -276,7 +276,9 @@ class UserDeck {
 					<a href="javascript:void(0)" onclick="UserDeck.showConnect()" class="button-primary" id="button-connect">Connect to UserDeck</a>
 				</p>
 				
-				<iframe id="guides-iframe" src="http://app.userdeck.com/install/guides" width="400" height="600" frameborder="0" ALLOWTRANSPARENCY="true" style="display: none; box-shadow: 0 1px 1px rgba(0,0,0,.04); border: 1px solid #e5e5e5; padding: 2px; background: #fff;"></iframe>
+				<style type="text/css">
+					#iframe-guides { display: none; box-shadow: 0 1px 1px rgba(0,0,0,.04); border: 1px solid #e5e5e5; padding: 2px; background: #fff; }
+				</style>
 			<?php endif; ?>
 		</div>
 		

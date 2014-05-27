@@ -5,11 +5,21 @@ var UserDeck = {
 	guides_key: null,
 	
 	showConnect : function () {
-		jQuery('#guides-iframe').show();
+		var wrapper = jQuery('#userdeck-wrapper');
+
+		var iframe = jQuery('<iframe id="iframe-guides" src="http://app.userdeck.com/install/guides" width="400" height="600" frameborder="0" ALLOWTRANSPARENCY="true"></iframe>')
+
+		wrapper.append(iframe);
+
+		iframe.on('load', function () {
+			iframe.show();
+		});
+
+		UserDeck.disableConnect();
 	},
 	
 	hideConnect : function () {
-		jQuery('#guides-iframe').hide();
+		jQuery('#iframe-guides').remove();
 	},
 	
 	disableConnect : function () {
