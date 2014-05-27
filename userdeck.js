@@ -42,7 +42,9 @@ var UserDeck = {
 				
 				UserDeck.hideConnect();
 				
-				window.location.replace(window.location.href + '&guides_key=' + guides_key);
+				jQuery.post(plugin_url, {'userdeck-submit': 1, guides_key: guides_key, _wpnonce: plugin_settings_nonce}, function () {
+					window.location.reload();
+				});
 			}
 		}
 	},

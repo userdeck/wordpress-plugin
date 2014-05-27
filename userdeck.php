@@ -167,12 +167,12 @@ class UserDeck {
 		foreach ($page_list as $page) {
 			$pages[$page->ID] = $page->post_title;
 		}
+
+		$guides_key = $options['guides_key'];
 		
-		$guides_key = null;
 		$show_guides_options = false;
 		
-		if (isset($_GET['guides_key'])) {
-			$guides_key = trim($_GET['guides_key']);
+		if ($guides_key) {
 			$show_guides_options = true;
 		}
 		
@@ -275,6 +275,11 @@ class UserDeck {
 				<p>
 					<a href="javascript:void(0)" onclick="UserDeck.showConnect()" class="button-primary" id="button-connect">Connect to UserDeck</a>
 				</p>
+
+				<script type="text/javascript">
+					var plugin_settings_nonce = "<?php echo wp_create_nonce('userdeck-options'); ?>";
+					var plugin_url = "<?php echo get_admin_url() . add_query_arg( array('page' => 'userdeck'), 'options-general.php' ); ?>";
+				</script>
 				
 				<style type="text/css">
 					#iframe-guides { display: none; box-shadow: 0 1px 1px rgba(0,0,0,.04); border: 1px solid #e5e5e5; padding: 2px; background: #fff; }
@@ -299,9 +304,8 @@ class UserDeck {
 		
 		if ( isset( $_POST['userdeck-submit'] ) ) {
 			if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
-				$options = $this->validate_settings( $_POST['userdeck'] );
+				$options = $this->validate_settings( array('guides_key' => $_POST['guides_key']) );
 				$this->update_settings( $options );
-				wp_redirect( add_query_arg( array('page' => 'userdeck', 'updated' => 1), 'options-general.php' ) );
 				exit;
 			}
 		}
@@ -310,7 +314,10 @@ class UserDeck {
 			if ( isset( $_POST['userdeck-page-create'] ) ) {
 				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-create' ) ) {
 					$page_title = wp_kses( trim( $_POST['page_title'] ), array() );
-					$guides_key = $_POST['guides_key'];
+					
+					$options = $this->get_settings();
+		
+					$guides_key = $options['guides_key'];
 					
 					if (!empty($page_title) && !empty($guides_key)) {
 						$page_id = wp_insert_post( array(
@@ -333,7 +340,10 @@ class UserDeck {
 			if ( isset( $_POST['userdeck-page-add'] ) ) {
 				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-add' ) ) {
 					$page_id = absint( $_POST['page_id'] );
-					$guides_key = $_POST['guides_key'];
+					
+					$options = $this->get_settings();
+		
+					$guides_key = $options['guides_key'];
 					
 					if (!empty($page_id) && !empty($guides_key)) {
 						$page = get_post($page_id);
