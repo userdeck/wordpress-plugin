@@ -2,8 +2,8 @@
 /**
  * Plugin Name: UserDeck
  * Plugin URI: http://userdeck.com/plugins/wordpress
- * Description: WordPress plugin for <a href="http://userdeck.com">UserDeck</a>.
- * Version: 0.0.1
+ * Description: Embedded customer support from <a href="http://userdeck.com">UserDeck</a> that embeds into your website.
+ * Version: 1.0.0
  * Author: UserDeck
  * Author URI: http://userdeck.com
  */
