@@ -1,19 +1,15 @@
 # UserDeck WordPress Plugin
 
-Easily integrate UserDeck's embedded support software into your WordPress site.
+A WordPress plugin to easily integrate the [UserDeck](http://userdeck.com) embedded support software into your WordPress website.
+
+Plugin page: [http://wordpress.org/plugins/userdeck](http://wordpress.org/plugins/userdeck)
 
 ## Install
 
-To setup, first [signup to UserDeck](http://userdeck.com) if you haven't already and get the helpdesk ID from the embed code. Next, install the plugin into WordPress and you will be asked to enter the helpdesk ID into settings. To add the knowledge base, create a new page and copy the short code. The feedback widget will automatically display on each page of your site.
+To setup, first [signup to UserDeck](http://userdeck.com) if you haven't already. Next, install the plugin into WordPress and you will be asked to connect to UserDeck on the settings page. Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
 
 ## Features
 
-### Feedback
+### Guides
 
-Gather feedback from your users which integrates with knowledge base articles to reduce support time. The plugin automatically sets up the widget to load on every page of your WordPress site.
-
-### Knowledge Base
-
-Add a knowledge base with UserDeck easily to any page of your WordPress site, just copy the shortcode into any page of your site and instantly you will see it work.
-
-Short code: `[userdeck_kb]`
+Guides is a knowledge base widget that embeds into any page of your WordPress website. You can embed a collection, category, or a single article instead of an entire knowledge base. It inherits your theme's design. Your users will save time by finding answers to common questions through self service.
