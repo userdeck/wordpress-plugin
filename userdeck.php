@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: UserDeck
- * Plugin URI: http://userdeck.com/plugins/wordpress
+ * Plugin URI: http://wordpress.org/plugins/userdeck
  * Description: Embedded customer support from <a href="http://userdeck.com">UserDeck</a> that embeds into your website.
  * Version: 1.0.0
  * Author: UserDeck
