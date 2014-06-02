@@ -2,10 +2,10 @@
 /**
  * Plugin Name: UserDeck
  * Plugin URI: http://wordpress.org/plugins/userdeck
- * Description: Embedded customer support from <a href="http://userdeck.com">UserDeck</a> that embeds into your website.
+ * Description: Embedded customer support from <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website">UserDeck</a> that embeds into your website.
  * Version: 1.0.0
  * Author: UserDeck
- * Author URI: http://userdeck.com
+ * Author URI: http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website
  */
 
 defined( 'ABSPATH' ) or die();

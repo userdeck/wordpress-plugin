@@ -9,7 +9,7 @@ Easily integrate UserDeck's embedded support software into your WordPress websit
 
 == Description ==
 
-[UserDeck](http://userdeck.com) provides customer support software that embeds into your WordPress website.
+[UserDeck](http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website) provides customer support software that embeds into your WordPress website.
 
 = Features =
 
