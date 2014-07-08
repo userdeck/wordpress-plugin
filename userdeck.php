@@ -273,10 +273,8 @@ class UserDeck {
 				</div>
 			<?php else: ?>
 				<p>
-					A UserDeck account is required to use the plugin. <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about UserDeck</a>.
+					An account is required to use the plugin. Don't have an account? You can create one for free.
 				</p>
-
-				<p>Connect below to login or signup. Don't have an account? You can create a new account for free.</p>
 				
 				<p id="button-connect">
 					<a href="javascript:void(0)" onclick="UserDeck.showConnect('login')" class="button button-primary button-hero">Login</a>
