@@ -6,7 +6,11 @@ Plugin page: [http://wordpress.org/plugins/userdeck](http://wordpress.org/plugin
 
 ## Install
 
-To setup, first [signup to UserDeck](http://userdeck.com) if you haven't already. Next, install the plugin into WordPress and you will be asked to connect to UserDeck on the settings page. Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
+To setup, first [signup to UserDeck](http://userdeck.com) if you haven't already.
+
+Next, install the plugin into WordPress and you will be asked to connect to UserDeck on the settings page.
+
+Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
 
 ## Features
 
