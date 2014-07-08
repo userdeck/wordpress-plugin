@@ -4,10 +4,10 @@ var UserDeck = {
 	
 	guides_key: null,
 	
-	showConnect : function () {
+	showConnect : function (type) {
 		var wrapper = jQuery('#userdeck-wrapper');
 
-		var iframe = jQuery('<iframe id="iframe-guides" src="http://app.userdeck.com/install/guides" width="400" height="600" frameborder="0" ALLOWTRANSPARENCY="true"></iframe>')
+		var iframe = jQuery('<iframe id="iframe-guides" src="http://app.userdeck.com/' + type + '?redir=install/guides" width="400" height="600" frameborder="0" ALLOWTRANSPARENCY="true"></iframe>')
 
 		wrapper.append(iframe);
 

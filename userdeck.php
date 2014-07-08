@@ -276,8 +276,10 @@ class UserDeck {
 
 				<p>Connect below to login or signup. Don't have an account? You can create a new account for free.</p>
 				
-				<p>
-					<a href="javascript:void(0)" onclick="UserDeck.showConnect()" class="button button-primary button-hero" id="button-connect">Connect to UserDeck</a>
+				<p id="button-connect">
+					<a href="javascript:void(0)" onclick="UserDeck.showConnect('login')" class="button button-primary button-hero">Login</a>
+					<span style="margin:0 10px;font-size:16px;">or</span>
+					<a href="javascript:void(0)" onclick="UserDeck.showConnect('signup')" class="button button-primary button-hero">Signup</a>
 				</p>
 
 				<script type="text/javascript">
