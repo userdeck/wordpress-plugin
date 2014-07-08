@@ -184,6 +184,8 @@ class UserDeck {
 		<div id="userdeck-wrapper" class="wrap">
 			<?php screen_icon( 'options-general' ); ?>
 			<h2>UserDeck</h2>
+
+			<p><a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">UserDeck</a> provides customer support software that embeds into your WordPress website.</p>
 			
 			<?php if ($show_guides_options): ?>
 				<h2>Guides</h2>
