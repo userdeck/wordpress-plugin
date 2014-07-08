@@ -285,7 +285,9 @@ class UserDeck {
 
 				<div id="connect-frame"></div>
 		
-				<h2>Guides</h2>
+				<h2>Features</h2>
+
+				<h3>Guides</h3>
 
 				<p>
 					A knowledge base widget that embeds inline to any page of your WordPress website.
