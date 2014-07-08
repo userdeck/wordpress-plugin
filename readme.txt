@@ -13,7 +13,15 @@ Easily integrate UserDeck's embedded support software into your WordPress websit
 
 = Features =
 
-Guides is a knowledge base widget that embeds into any page of your WordPress website. You can embed a collection, category, or a single article instead of an entire knowledge base. It inherits your theme's design. Your users will save time by finding answers to common questions through self service.
+Guides is a knowledge base widget that embeds inline to any page of your WordPress website.
+
+It inherits your theme's design and blends right in.
+
+You can embed a collection, category, or a single article instead of an entire knowledge base.
+
+Your users will save time by finding answers to common questions through self service.
+
+[Learn more about Guides](http://userdeck.com/guides?utm_source=wordpress&utm_medium=link&utm_campaign=website)
 
 == Installation ==
 
