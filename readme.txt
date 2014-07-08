@@ -22,7 +22,7 @@ This section describes how to install the plugin and get it working.
 1. Upload the userdeck folder to your wp-content/plugins/ directory.
 2. Activate the plugin through the Plugins menu in WordPress.
 3. Go to the settings page.
-4. Connect to UserDeck.
+4. Login or signup for an account.
 5. Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
 
 == Screenshots ==
