@@ -285,29 +285,31 @@ class UserDeck {
 
 				<div id="connect-frame"></div>
 		
-				<h2>Features</h2>
+				<div id="feature-wrapper">
+					<h2>Features</h2>
 
-				<h3>Guides</h3>
+					<h3>Guides</h3>
 
-				<p>
-					A knowledge base widget that embeds inline to any page of your WordPress website.
-				</p>
+					<p>
+						A knowledge base widget that embeds inline to any page of your WordPress website.
+					</p>
 
-				<p>
-					It inherits your theme's design and blends right in.
-				</p>
+					<p>
+						It inherits your theme's design and blends right in.
+					</p>
 
-				<p>
-					You can embed a collection, category, or a single article instead of an entire knowledge base.
-				</p>
+					<p>
+						You can embed a collection, category, or a single article instead of an entire knowledge base.
+					</p>
 
-				<p>
-					Your users will save time by finding answers to common questions through self service.
-				</p>
+					<p>
+						Your users will save time by finding answers to common questions through self service.
+					</p>
 
-				<p>
-					<a href="http://userdeck.com/guides?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about Guides</a>
-				</p>
+					<p>
+						<a href="http://userdeck.com/guides?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about Guides</a>
+					</p>
+				</div>
 
 				<script type="text/javascript">
 					var plugin_settings_nonce = "<?php echo wp_create_nonce('userdeck-options'); ?>";
