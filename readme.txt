@@ -1,4 +1,4 @@
-=== UserDeck ===
+=== UserDeck Customer Support ===
 Contributors: userdeck
 Tags: userdeck, customer support, customer service, knowledge base, faq, frequently asked questions, documentation, docs
 Requires at least: 3.0.1
