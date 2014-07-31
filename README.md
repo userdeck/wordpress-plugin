@@ -1,12 +1,12 @@
 # UserDeck WordPress Plugin
 
-A WordPress plugin to easily integrate the [UserDeck](http://userdeck.com) embedded support software into your WordPress website.
+A WordPress plugin to easily integrate the [UserDeck](http://userdeck.com?utm_source=github&utm_medium=link&utm_campaign=website) embedded support software into your WordPress website.
 
 Plugin page: [http://wordpress.org/plugins/userdeck](http://wordpress.org/plugins/userdeck)
 
 ## Install
 
-To setup, first [signup to UserDeck](http://userdeck.com) if you haven't already.
+To setup, first [signup to UserDeck](http://userdeck.com?utm_source=github&utm_medium=link&utm_campaign=website) if you haven't already.
 
 Next, install the plugin into WordPress and you will be asked to connect to UserDeck on the settings page.
 
@@ -24,4 +24,4 @@ You can embed a collection, category, or a single article instead of an entire k
 
 Your users will save time by finding answers to common questions through self service.
 
-[Learn more about Guides](http://userdeck.com/guides?utm_source=wordpress&utm_medium=link&utm_campaign=website)
+[Learn more about Guides](http://userdeck.com/guides?utm_source=github&utm_medium=link&utm_campaign=website)
