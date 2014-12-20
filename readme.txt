@@ -3,7 +3,7 @@ Contributors: userdeck
 Tags: userdeck, customer support, customer service, knowledge base, faq, frequently asked questions, documentation, docs
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
 
@@ -40,6 +40,9 @@ This section describes how to install the plugin and get it working.
 3. UserDeck control panel
 
 == Changelog ==
+
+= 1.0.2 =
+* Changed iframe to use ssl
 
 = 1.0.1 =
 * Improved connect flows
