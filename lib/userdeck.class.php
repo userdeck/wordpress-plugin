@@ -6,6 +6,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 	class UserDeck {
 
+		protected static $instance;
+
 		/**
 		 * singleton method
 		 */
