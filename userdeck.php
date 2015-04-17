@@ -11,6 +11,17 @@
 defined( 'ABSPATH' ) or die();
 
 class UserDeck {
+
+	/**
+	 * singleton method
+	 */
+	public static function instance() {
+		if ( !is_a( self::$instance, __CLASS__ ) ) {
+			self::$instance = new self();
+		}
+		
+		return self::$instance;
+	}
 	
 	/**
 	 * class constructor
