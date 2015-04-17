@@ -26,17 +26,29 @@ if ( !class_exists( 'UserDeck' ) ) {
 			register_activation_hook( __FILE__, array( $this, 'install' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
 			
+			$this->add_actions();
+			$this->add_filters();
+			$this->add_shortcodes();
+		}
+
+		public function add_actions()
+		{
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( $this, 'create_options_page') );
 				add_action( 'admin_init', array( $this, 'settings_init') );
 				add_action( 'admin_notices', array( $this, 'admin_notice') );
 			}
-			
-			add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
-			
+		}
+
+		public function add_filters()
+		{
 			$plugin = plugin_basename(__FILE__);
 			add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
-			
+		}
+
+		public function add_shortcodes()
+		{
+			add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
 		}
 		
 		public function install() {}
