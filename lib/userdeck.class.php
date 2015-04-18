@@ -43,7 +43,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( $this, 'create_options_page') );
 				add_action( 'admin_init', array( $this, 'settings_init') );
-				add_action( 'admin_notices', array( $this, 'admin_notice') );
+				add_action( 'admin_notices', array( $this, 'build_admin_alerts') );
 			}
 		}
 
@@ -145,7 +145,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 * and a friendly reminder if the guide key hasn't been entered
 		 * @return null
 		 */
-		public function admin_notice() {
+		public function build_admin_alerts() {
 			
 			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_added'] ) ) {
 
