@@ -74,6 +74,16 @@ if ( !class_exists( 'UserDeck' ) ) {
 			));
 			
 		}
+
+		public function render_admin_alerts() {
+
+			foreach ($this->admin_alerts as $alert) {
+				echo '<div class="' . $alert['type'] . '">';
+				echo '<p>' . $alert['message'] . '</p>';
+				echo '</div>';
+			}
+
+		}
 		
 		/**
 		 * retrieve the userdeck options
