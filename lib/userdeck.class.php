@@ -176,7 +176,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 				if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
 					if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
 						?>
-							<div class="error" id="userdeck-notice">
+							<div class="error">
 								<p>
 									<strong>UserDeck is not setup</strong>.
 									Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
