@@ -152,7 +152,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 				$message = sprintf( 'Page created. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
 
-				$this->add_admin_notice( 'updated', $message );
+				$this->add_admin_alert( 'updated', $message );
 				
 			}
 			
@@ -160,7 +160,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 				
 				$message = sprintf( 'Page updated. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
 
-				$this->add_admin_notice( 'updated', $message );
+				$this->add_admin_alert( 'updated', $message );
 				
 			}
 
