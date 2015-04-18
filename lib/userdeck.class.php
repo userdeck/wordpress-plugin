@@ -43,7 +43,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( $this, 'create_options_page') );
 				add_action( 'admin_init', array( $this, 'settings_init') );
-				add_action( 'admin_notices', array( $this, 'build_admin_alerts') );
+				add_action( 'admin_init', array( $this, 'build_admin_alerts') );
 			}
 		}
 
