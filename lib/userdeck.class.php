@@ -10,6 +10,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 		protected $plugin_path;
 
+		protected $admin_alerts = array();
+
 		/**
 		 * singleton method
 		 */
@@ -61,6 +63,15 @@ if ( !class_exists( 'UserDeck' ) ) {
 		public function uninstall() {
 			
 			delete_option('userdeck');
+			
+		}
+
+		public function add_admin_alert($type, $message) {
+
+			array_unshift($this->admin_alerts, array(
+				'type' => $type,
+				'message' => $message,
+			));
 			
 		}
 		
