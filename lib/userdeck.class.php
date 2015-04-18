@@ -142,7 +142,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		
 		/**
 		 * show a 'settings saved' notice
-		 * and a friendly reminder if the app ID or secret key haven't been entered
+		 * and a friendly reminder if the guide key hasn't been entered
 		 * @return null
 		 */
 		public function admin_notice() {
