@@ -232,7 +232,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 				return;
 			}
 			
-			wp_enqueue_script( 'userdeck', plugins_url( '/userdeck.js' , __FILE__ ), array('jquery') );
+			wp_enqueue_script( 'userdeck', $this->plugin_url . 'userdeck.js', array('jquery') );
 			
 			register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
 			
