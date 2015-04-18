@@ -10,6 +10,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 		protected $plugin_path;
 
+		protected $plugin_url;
+
 		protected $admin_alerts = array();
 
 		/**
@@ -29,6 +31,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 */
 		public function __construct() {
 			$this->plugin_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
+			$this->plugin_url = trailingslashit( plugins_url( '', dirname( __FILE__ ) ) );
 			
 			register_activation_hook( __FILE__, array( $this, 'install' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
