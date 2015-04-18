@@ -224,6 +224,10 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 * @return null
 		 */
 		public function settings_init() {
+
+			if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
+				return;
+			}
 			
 			wp_enqueue_script( 'userdeck', plugins_url( '/userdeck.js' , __FILE__ ), array('jquery') );
 			
