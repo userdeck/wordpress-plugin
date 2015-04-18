@@ -8,6 +8,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 		protected static $instance;
 
+		protected $plugin_path;
+
 		/**
 		 * singleton method
 		 */
@@ -24,6 +26,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 * register the activation and de-activation hooks and hook into a bunch of actions
 		 */
 		public function __construct() {
+			$this->plugin_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
 			
 			register_activation_hook( __FILE__, array( $this, 'install' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
