@@ -148,22 +148,18 @@ if ( !class_exists( 'UserDeck' ) ) {
 		public function admin_notice() {
 			
 			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_added'] ) ) {
-				
-				?>
-				<div class="updated">
-					<p>Page created. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
-				</div>
-				<?php
+
+				$message = sprintf( 'Page created. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+
+				$this->add_admin_notice( 'updated', $message );
 				
 			}
 			
 			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_updated'] ) ) {
 				
-				?>
-				<div class="updated">
-					<p>Page updated. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
-				</div>
-				<?php
+				$message = sprintf( 'Page updated. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+
+				$this->add_admin_notice( 'updated', $message );
 				
 			}
 
@@ -175,14 +171,9 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 				if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
 					if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
-						?>
-							<div class="error">
-								<p>
-									<strong>UserDeck is not setup</strong>.
-									Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
-								</p>
-							</div>
-						<?php
+						$message = '<strong>UserDeck is not setup</strong>. Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.';
+						
+						$this->add_admin_alert('error', $message);
 					}
 				}
 			}
