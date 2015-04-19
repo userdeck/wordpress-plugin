@@ -8,7 +8,7 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 		public function __construct() {
 
-			add_shortcode( 'userdeck_guides', array( $this, 'output_code') );
+			add_shortcode( 'userdeck_guides', array( $this, 'render_code') );
 
 		}
 		
@@ -16,7 +16,7 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 		 * output the userdeck guides javascript install code
 		 * @return null
 		 */
-		public function output_code() {
+		public function render_code() {
 			
 			// retrieve the options
 			$options = UserDeck::instance()->get_settings();
