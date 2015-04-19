@@ -8,6 +8,12 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 		public function __construct() {
 
+			$this->add_shortcode();
+
+		}
+
+		public function add_shortcode() {
+
 			add_shortcode( 'userdeck_guides', array( $this, 'render_code') );
 
 		}
