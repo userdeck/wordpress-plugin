@@ -10,14 +10,14 @@
 
 defined( 'ABSPATH' ) or die();
 
-if ( file_exists( dirname( __FILE__ ) . '/lib/userdeck.class.php' ) ) {
-	require_once( dirname( __FILE__ ) . '/lib/userdeck.class.php' );
-}
-
-function userdeck_init() {
-	global $userdeck;
+function userdeck_initialize_plugin() {
 	
-	$userdeck = new UserDeck();
+	if ( file_exists( dirname( __FILE__ ) . '/lib/userdeck.class.php' ) ) {
+		require_once( dirname( __FILE__ ) . '/lib/userdeck.class.php' );
+		userdeck();
+	}
+
 }
 
-add_action( 'init', 'userdeck_init', 0 );
+// Initialize the plugin.
+add_action( 'plugins_loaded', 'userdeck_initialize_plugin' );
