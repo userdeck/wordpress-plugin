@@ -22,14 +22,10 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 			$options = UserDeck::instance()->get_settings();
 			
 			$guides_key = $options['guides_key'];
-			
-			?>
-			
-			<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
-			<script src="//widgets.userdeck.com/guides.js"></script>
-			
-			<?php
-			
+
+			echo sprintf('<a href="http://userdeck.com" data-userdeck-guides="%s">Customer Support Software</a>', $guides_key);
+			echo '<script src="//widgets.userdeck.com/guides.js"></script>';
+
 		}
 		
 		public static function generate_shortcode($guides_key) {
