@@ -35,10 +35,16 @@ if ( !class_exists( 'UserDeck' ) ) {
 			
 			register_activation_hook( __FILE__, array( $this, 'install' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
-			
+
+			$this->load_guide();
 			$this->add_actions();
 			$this->add_filters();
-			$this->add_shortcodes();
+		}
+
+		public function load_guide()
+		{
+			require_once( $this->plugin_path . 'lib/guide.class.php' );
+			$guide = new UserDeck_Guide();
 		}
 
 		public function add_actions()
@@ -55,11 +61,6 @@ if ( !class_exists( 'UserDeck' ) ) {
 		{
 			$plugin = plugin_basename(__FILE__);
 			add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
-		}
-
-		public function add_shortcodes()
-		{
-			add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
 		}
 		
 		public function install() {}
@@ -108,32 +109,6 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 			update_option( 'userdeck', $options );
 
-		}
-		
-		/**
-		 * output the userdeck guides javascript install code
-		 * @return null
-		 */
-		public function output_guides_code() {
-			
-			// retrieve the options
-			$options = $this->get_settings();
-			
-			$guides_key = $options['guides_key'];
-			
-			?>
-			
-			<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
-			<script src="//widgets.userdeck.com/guides.js"></script>
-			
-			<?php
-			
-		}
-		
-		public function generate_guides_shortcode($guides_key) {
-			
-			return '[userdeck_guides key="'.$guides_key.'"]';
-			
 		}
 		
 		/**
@@ -214,7 +189,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 				$show_guides_options = true;
 			}
 
-			$guides_shortcode = $this->generate_guides_shortcode($guides_key);
+			$guides_shortcode = UserDeck_Guide::generate_shortcode($guides_key);
 			
 			include( $this->plugin_path . 'views/admin-options.php' );
 			
@@ -253,14 +228,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 						$guides_key = $options['guides_key'];
 						
 						if (!empty($page_title) && !empty($guides_key)) {
-							$page_id = wp_insert_post( array(
-								'post_title'     => $page_title,
-								'post_content'   => $this->generate_guides_shortcode($guides_key),
-								'post_status'    => 'publish',
-								'post_author'    => get_current_user_id(),
-								'post_type'      => 'page',
-								'comment_status' => 'closed',
-							) );
+							$page_id = UserDeck_Guide::create_page($page_title, $guides_key);
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
 							exit;
@@ -279,14 +247,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 						$guides_key = $options['guides_key'];
 						
 						if (!empty($page_id) && !empty($guides_key)) {
-							$page = get_post($page_id);
-							$page_content = $page->post_content;
-							$page_content .= "\n" . $this->generate_guides_shortcode($guides_key);
-							
-							$page_id = wp_update_post( array(
-								'ID'           => $page_id,
-								'post_content' => $page_content,
-							) );
+							$page_id = UserDeck_Guide::update_page($page_id, $guides_key);
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
 							exit;
