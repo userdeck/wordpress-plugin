@@ -321,5 +321,11 @@ if ( !class_exists( 'UserDeck' ) ) {
 		}
 		
 	}
+
+	function userdeck() {
+
+		return UserDeck::instance();
+
+	}
 	
 }
