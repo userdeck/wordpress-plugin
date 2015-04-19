@@ -6,6 +6,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 	class UserDeck {
 
+		const VERSION = '1.0.2';
+
 		protected static $instance;
 
 		protected $plugin_path;
