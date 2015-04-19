@@ -34,6 +34,12 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 			
 		}
 
+		public static function page_has_shortcode($page_content) {
+			
+			return has_shortcode($page_content, 'userdeck_guides');
+
+		}
+
 		public static function create_page($page_title, $guides_key) {
 
 			$page_id = wp_insert_post( array(
