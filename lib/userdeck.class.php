@@ -143,35 +143,40 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 */
 		public function build_admin_alerts() {
 			
-			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_added'] ) ) {
+			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
 
-				$message = sprintf( 'Page created. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+				if ( isset( $_GET['page_added'] ) ) {
 
-				$this->add_admin_alert( 'updated', $message );
+					$message = sprintf( 'Page created. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+
+					$this->add_admin_alert( 'updated', $message );
+					
+				}
+				
+				if ( isset( $_GET['page_updated'] ) ) {
+					
+					$message = sprintf( 'Page updated. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+
+					$this->add_admin_alert( 'updated', $message );
+					
+				}
 				
 			}
-			
-			if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_updated'] ) ) {
-				
-				$message = sprintf( 'Page updated. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) );
+			else {
 
-				$this->add_admin_alert( 'updated', $message );
-				
-			}
+				// show a reminder to users who can update options
+				if ( current_user_can( 'manage_options' ) ) {
 
-			// show a reminder to users who can update options
+					$options = $this->get_settings();
 
-			if ( current_user_can( 'manage_options' ) ) {
-
-				$options = $this->get_settings();
-
-				if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
-					if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
+					if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
 						$message = '<strong>UserDeck is not setup</strong>. Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.';
 						
 						$this->add_admin_alert('error', $message);
 					}
+					
 				}
+
 			}
 
 		}
