@@ -8,7 +8,14 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 		public function __construct() {
 
+			$this->add_actions();
 			$this->add_shortcode();
+
+		}
+
+		public function add_actions() {
+
+			add_action( 'wp_head', array( $this, 'render_escaped_fragment_meta') );
 
 		}
 
@@ -16,6 +23,15 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 			add_shortcode( 'userdeck_guides', array( $this, 'render_code') );
 
+		}
+
+		public function render_escaped_fragment_meta()
+		{
+			global $post;
+			
+			if ( isset( $post ) && is_singular() && UserDeck_Guide::page_has_shortcode( $post->post_content ) ) {
+				echo '<meta name="fragment" content="!">';
+			}
 		}
 		
 		/**
