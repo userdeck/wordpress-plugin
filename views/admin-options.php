@@ -83,7 +83,7 @@
 					<div class="inside">
 						<p>Copy the Guides shortcode to any of your pages or posts.</p>
 						
-						<?php $this->output_guides_shortcode($guides_key) ?>
+						<input type="text" onfocus="this.select()" readonly="readonly" value='<?php echo $guides_shortcode ?>' class="code" style="width: 350px;" />
 					</div>
 				</div>
 			</div>

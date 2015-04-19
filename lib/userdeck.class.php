@@ -136,14 +136,6 @@ if ( !class_exists( 'UserDeck' ) ) {
 			
 		}
 		
-		public function output_guides_shortcode($guides_key) {
-			
-			?>
-			<input type="text" onfocus="this.select()" readonly="readonly" value='<?php echo $this->generate_guides_shortcode($guides_key) ?>' class="code" style="width: 350px;" />
-			<?php
-			
-		}
-		
 		/**
 		 * show a 'settings saved' notice
 		 * and a friendly reminder if the guide key hasn't been entered
@@ -216,6 +208,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 			if ($guides_key) {
 				$show_guides_options = true;
 			}
+
+			$guides_shortcode = $this->generate_guides_shortcode($guides_key);
 			
 			include( $this->plugin_path . 'views/admin-options.php' );
 			
