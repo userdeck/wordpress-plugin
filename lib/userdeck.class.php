@@ -52,7 +52,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		public function add_actions()
 		{
 			if ( is_admin() ) {
-				add_action( 'admin_menu', array( $this, 'create_options_page') );
+				add_action( 'admin_menu', array( $this, 'create_admin_menu_items') );
 				add_action( 'admin_init', array( $this, 'settings_init') );
 				add_action( 'admin_init', array( $this, 'build_admin_alerts') );
 				add_action( 'admin_notices', array( $this, 'render_admin_alerts') );
@@ -162,7 +162,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 * create the relevant type of options page
 		 * @return null
 		 */
-		public function create_options_page() {
+		public function create_admin_menu_items() {
 			
 			add_options_page('UserDeck Settings', 'UserDeck', 'manage_options', 'userdeck', array($this, 'render_options_page'));
 			
