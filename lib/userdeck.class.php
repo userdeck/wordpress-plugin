@@ -8,6 +8,8 @@ if ( !class_exists( 'UserDeck' ) ) {
 
 		const VERSION = '1.0.2';
 
+		const SLUG = 'userdeck';
+
 		protected static $instance;
 
 		protected $plugin_path;
