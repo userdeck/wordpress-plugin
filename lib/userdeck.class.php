@@ -166,7 +166,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 */
 		public function create_admin_menu_items() {
 			
-			add_options_page('UserDeck Settings', 'UserDeck', 'manage_options', 'userdeck', array($this, 'render_options_page'));
+			add_options_page('UserDeck', 'UserDeck', 'manage_options', 'userdeck', array($this, 'render_options_page'));
 			
 		}
 		
