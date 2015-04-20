@@ -6,6 +6,8 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 	class UserDeck_Guide {
 
+		const PROXY_URL = 'https://userdeck.net/g/';
+
 		public function __construct() {
 
 			$this->add_actions();
@@ -27,11 +29,75 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 
 		public function render_escaped_fragment_meta()
 		{
+
 			global $post;
 			
 			if ( isset( $post ) && is_singular() && UserDeck_Guide::page_has_shortcode( $post->post_content ) ) {
 				echo '<meta name="fragment" content="!">';
 			}
+
+		}
+
+		public function escaped_fragment_request()
+		{
+
+			return isset( $_GET['_escaped_fragment_'] );
+
+		}
+
+		public function escaped_fragment_path()
+		{
+
+			$path = '';
+
+			if ( $_GET['_escaped_fragment_'] ) {
+				$path = $_GET['_escaped_fragment_'][0] == '/' ? substr( $_GET['_escaped_fragment_'], 1 ) : $_GET['_escaped_fragment_'];
+			}
+
+			return $path;
+
+		}
+
+		public function fetch_content($guides_key)
+		{
+
+			global $wp_version;
+
+			$path = $this->escaped_fragment_path();
+
+			$base_uri = static::PROXY_URL . $guides_key . '/';
+
+			if ( $path == '' ) {
+				$base_uri = untrailingslashit( $base_uri );
+			}
+
+			$request = wp_remote_get( $base_uri . $path, array(
+				'timeout' => 6,
+				'user-agent' => 'WordPress/' . $wp_version . '; UserDeck Plugin/' . UserDeck::VERSION .'; ' . home_url(),
+			) );
+
+			$content = '';
+
+			if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
+				$content = wp_remote_retrieve_body( $request );
+			}
+
+			return $this->parse_content($content, $guides_key);
+			
+		}
+
+		public function parse_content($content, $guides_key)
+		{
+
+			preg_match('/\<body\>(.*?)\<\/body\>/is', $content, $body);
+			$body = $body[1];
+			
+			$content = strstr($body, '<div class="content">');
+			
+			$content = str_replace('/g/'.$guides_key.'/', get_permalink().'#!', $content);
+
+			return $content;
+
 		}
 		
 		/**
@@ -45,8 +111,13 @@ if ( !class_exists( 'UserDeck_Guide' ) ) {
 			
 			$guides_key = $options['guides_key'];
 
-			echo sprintf('<a href="http://userdeck.com" data-userdeck-guides="%s">Customer Support Software</a>', $guides_key);
-			echo '<script src="//widgets.userdeck.com/guides.js"></script>';
+			if ($this->escaped_fragment_request()) {
+				echo $this->fetch_content($guides_key);
+			}
+			else {
+				echo sprintf('<a href="http://userdeck.com" data-userdeck-guides="%s">Customer Support Software</a>', $guides_key);
+				echo '<script src="//widgets.userdeck.com/guides.js"></script>';
+			}
 
 		}
 		
