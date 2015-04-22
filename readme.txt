@@ -2,7 +2,7 @@
 Contributors: userdeck
 Tags: userdeck, customer support, customer service, knowledge base, faq, frequently asked questions, documentation, docs, widgets
 Requires at least: 3.0.1
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: 1.0.2
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
