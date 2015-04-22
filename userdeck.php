@@ -383,65 +383,68 @@ class UserDeck {
 	 */
 	public function settings_init() {
 		
-		wp_enqueue_script( 'userdeck', plugins_url( '/userdeck.js' , __FILE__ ), array('jquery') );
-		
-		register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
-		
-		if ( isset( $_POST['userdeck-submit'] ) ) {
-			if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
-				$options = $this->validate_settings( array('guides_key' => $_POST['guides_key']) );
-				$this->update_settings( $options );
-				exit;
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' ) {
+
+			wp_enqueue_script( 'userdeck', plugins_url( '/userdeck.js' , __FILE__ ), array('jquery') );
+			
+			register_setting( 'userdeck', 'userdeck', array( $this, 'validate_settings' ) );
+			
+			if ( isset( $_POST['userdeck-submit'] ) ) {
+				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-options' ) ) {
+					$options = $this->validate_settings( array('guides_key' => $_POST['guides_key']) );
+					$this->update_settings( $options );
+					exit;
+				}
 			}
-		}
-		
-		if (current_user_can('publish_pages')) {
-			if ( isset( $_POST['userdeck-page-create'] ) ) {
-				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-create' ) ) {
-					$page_title = wp_kses( trim( $_POST['page_title'] ), array() );
-					
-					$options = $this->get_settings();
-		
-					$guides_key = $options['guides_key'];
-					
-					if (!empty($page_title) && !empty($guides_key)) {
-						$page_id = wp_insert_post( array(
-							'post_title'     => $page_title,
-							'post_content'   => $this->generate_guides_shortcode($guides_key),
-							'post_status'    => 'publish',
-							'post_author'    => get_current_user_id(),
-							'post_type'      => 'page',
-							'comment_status' => 'closed',
-						) );
+			
+			if (current_user_can('publish_pages')) {
+				if ( isset( $_POST['userdeck-page-create'] ) ) {
+					if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-create' ) ) {
+						$page_title = wp_kses( trim( $_POST['page_title'] ), array() );
 						
-						wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
-						exit;
+						$options = $this->get_settings();
+			
+						$guides_key = $options['guides_key'];
+						
+						if (!empty($page_title) && !empty($guides_key)) {
+							$page_id = wp_insert_post( array(
+								'post_title'     => $page_title,
+								'post_content'   => $this->generate_guides_shortcode($guides_key),
+								'post_status'    => 'publish',
+								'post_author'    => get_current_user_id(),
+								'post_type'      => 'page',
+								'comment_status' => 'closed',
+							) );
+							
+							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+							exit;
+						}
 					}
 				}
 			}
-		}
-		
-		if (current_user_can('edit_pages')) {
-			if ( isset( $_POST['userdeck-page-add'] ) ) {
-				if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-add' ) ) {
-					$page_id = absint( $_POST['page_id'] );
-					
-					$options = $this->get_settings();
-		
-					$guides_key = $options['guides_key'];
-					
-					if (!empty($page_id) && !empty($guides_key)) {
-						$page = get_post($page_id);
-						$page_content = $page->post_content;
-						$page_content .= "\n" . $this->generate_guides_shortcode($guides_key);
+			
+			if (current_user_can('edit_pages')) {
+				if ( isset( $_POST['userdeck-page-add'] ) ) {
+					if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-add' ) ) {
+						$page_id = absint( $_POST['page_id'] );
 						
-						$page_id = wp_update_post( array(
-							'ID'           => $page_id,
-							'post_content' => $page_content,
-						) );
+						$options = $this->get_settings();
+			
+						$guides_key = $options['guides_key'];
 						
-						wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
-						exit;
+						if (!empty($page_id) && !empty($guides_key)) {
+							$page = get_post($page_id);
+							$page_content = $page->post_content;
+							$page_content .= "\n" . $this->generate_guides_shortcode($guides_key);
+							
+							$page_id = wp_update_post( array(
+								'ID'           => $page_id,
+								'post_content' => $page_content,
+							) );
+							
+							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+							exit;
+						}
 					}
 				}
 			}
