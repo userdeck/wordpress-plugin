@@ -26,6 +26,8 @@ class UserDeck {
 			add_action( 'admin_init', array( $this, 'settings_init') );
 			add_action( 'admin_notices', array( $this, 'admin_notice') );
 		}
+
+		add_action( 'wp_head', array( $this, 'output_escaped_fragment_meta' ) );
 		
 		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
 		
@@ -95,6 +97,18 @@ class UserDeck {
 		<input type="text" onfocus="this.select()" readonly="readonly" value='<?php echo $this->generate_guides_shortcode($guides_key) ?>' class="code" style="width: 350px;" />
 		<?php
 		
+	}
+
+	public function output_escaped_fragment_meta() {
+
+		global $post;
+		
+		if ( isset( $post ) && is_singular() && has_shortcode( $post->post_content, 'userdeck_guides' ) ) {
+			?>
+			<meta name="fragment" content="!">
+			<?php
+		}
+
 	}
 	
 	/**
