@@ -75,13 +75,48 @@ class UserDeck {
 		$options = $this->get_settings();
 		
 		$guides_key = $options['guides_key'];
-		
-		?>
-		
-		<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
-		<script src="//widgets.userdeck.com/guides.js"></script>
-		
-		<?php
+
+		if (isset( $_GET['_escaped_fragment_'] )) {
+
+			$path = '';
+
+			if ( $_GET['_escaped_fragment_'] ) {
+				$path = $_GET['_escaped_fragment_'][0] == '/' ? substr( $_GET['_escaped_fragment_'], 1 ) : $_GET['_escaped_fragment_'];
+			}
+
+			$base_uri = 'https://userdeck.net/g/' . $guides_key . '/';
+
+			if ( $path == '' ) {
+				$base_uri = untrailingslashit( $base_uri );
+			}
+
+			$request = wp_remote_get( $base_uri . $path );
+
+			$content = '';
+
+			if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
+				$content = wp_remote_retrieve_body( $request );
+			}
+
+			preg_match('/\<body\>(.*?)\<\/body\>/is', $content, $body);
+			$body = $body[1];
+			
+			$content = strstr($body, '<div class="content">');
+			
+			$content = str_replace('/g/'.$guides_key.'/', get_permalink().'#!', $content);
+
+			echo $content;
+
+		}
+		else {
+			
+			?>
+			
+			<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
+			<script src="//widgets.userdeck.com/guides.js"></script>
+			
+			<?php
+		}
 		
 	}
 	
