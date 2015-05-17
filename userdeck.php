@@ -39,6 +39,7 @@ class UserDeck {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'create_options_page') );
 			add_action( 'admin_init', array( $this, 'settings_init') );
+			add_action( 'admin_init', array( $this, 'migrate_guides_shortcodes') );
 			add_action( 'admin_notices', array( $this, 'admin_notice') );
 		}
 
@@ -58,6 +59,39 @@ class UserDeck {
 	public function uninstall() {
 		
 		delete_option('userdeck');
+		
+	}
+	
+	public function migrate_guides_shortcodes() {
+		
+		$options = $this->get_settings();
+		
+		if ( isset( $options['migrate_guides_shortcodes'] ) && $options['migrate_guides_shortcodes'] == 1 ) {
+			return;
+		}
+		
+		$pages = get_pages(array('post_type' => 'page'));
+		
+		foreach ($pages as $page) {
+			if ( has_shortcode( $page->post_content, 'userdeck_guides' ) ) {
+				
+				$page_content = strip_shortcodes($page->post_content);
+				
+				$guides_key = $options['guides_key'];
+				
+				update_post_meta( $page->ID, 'userdeck_guides_key', $guides_key );
+				
+				wp_update_post( array(
+					'ID'           => $page->ID,
+					'post_content' => $page_content,
+				) );
+				
+			}
+		}
+		
+		$options['migrate_guides_shortcodes'] = 1;
+		
+		$this->update_settings($options);
 		
 	}
 	
