@@ -37,7 +37,7 @@ class UserDeck {
 		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
 		
 		if ( is_admin() ) {
-			add_action( 'admin_menu', array( $this, 'create_options_page') );
+			add_action( 'admin_menu', array( $this, 'create_menu_page') );
 			add_action( 'admin_init', array( $this, 'settings_init') );
 			add_action( 'admin_init', array( $this, 'migrate_guides_shortcodes') );
 			add_action( 'admin_notices', array( $this, 'admin_notice') );
@@ -343,9 +343,9 @@ class UserDeck {
 	 * create the relevant type of options page
 	 * @return null
 	 */
-	public function create_options_page() {
+	public function create_menu_page() {
 		
-		add_options_page('UserDeck Settings', 'UserDeck', 'manage_options', 'userdeck', array($this, 'render_options_page'));
+		add_menu_page('UserDeck', 'UserDeck', 'manage_options', 'userdeck', array($this, 'render_options_page'));
 		
 	}
 	
