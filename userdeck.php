@@ -29,7 +29,9 @@ class UserDeck {
 
 		add_action( 'wp_head', array( $this, 'output_escaped_fragment_meta' ) );
 		
-		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_code') );
+		add_filter( 'the_content', array( $this, 'output_guides_page' ) );
+		
+		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_shortcode') );
 		
 		$plugin = plugin_basename(__FILE__);
 		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
@@ -65,16 +67,42 @@ class UserDeck {
 
 	}
 	
-	/**
-	 * output the userdeck guides javascript install code
-	 * @return null
-	 */
-	public function output_guides_code() {
+	public function output_guides_page( $content ) {
+		
+		global $post;
+		
+		if ( isset( $post ) && is_singular() ) {
+		
+			$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
+			
+			if (!empty($guides_key)) {
+				return $this->output_guides_code($guides_key);
+			}
+			
+		}
+		
+		return $content;
+		
+	}
+	
+	public function output_guides_shortcode() {
 		
 		// retrieve the options
 		$options = $this->get_settings();
 		
 		$guides_key = $options['guides_key'];
+		
+		return $this->output_guides_code($guides_key);
+		
+	}
+	
+	/**
+	 * output the userdeck guides javascript install code
+	 * @return null
+	 */
+	public function output_guides_code($guides_key) {
+		
+		$content = '';
 
 		if (isset( $_GET['_escaped_fragment_'] )) {
 
@@ -394,12 +422,13 @@ class UserDeck {
 						if (!empty($page_title) && !empty($guides_key)) {
 							$page_id = wp_insert_post( array(
 								'post_title'     => $page_title,
-								'post_content'   => $this->generate_guides_shortcode($guides_key),
 								'post_status'    => 'publish',
 								'post_author'    => get_current_user_id(),
 								'post_type'      => 'page',
 								'comment_status' => 'closed',
 							) );
+							
+							update_post_meta( $page_id, 'userdeck_guides_key', $guides_key );
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
 							exit;
@@ -418,14 +447,7 @@ class UserDeck {
 						$guides_key = $options['guides_key'];
 						
 						if (!empty($page_id) && !empty($guides_key)) {
-							$page = get_post($page_id);
-							$page_content = $page->post_content;
-							$page_content .= "\n" . $this->generate_guides_shortcode($guides_key);
-							
-							$page_id = wp_update_post( array(
-								'ID'           => $page_id,
-								'post_content' => $page_content,
-							) );
+							update_post_meta( $page_id, 'userdeck_guides_key', $guides_key );
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
 							exit;
