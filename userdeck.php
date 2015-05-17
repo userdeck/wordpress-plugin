@@ -125,14 +125,6 @@ class UserDeck {
 		return '[userdeck_guides key="'.$guides_key.'"]';
 		
 	}
-	
-	public function output_guides_shortcode($guides_key) {
-		
-		?>
-		<input type="text" onfocus="this.select()" readonly="readonly" value='<?php echo $this->generate_guides_shortcode($guides_key) ?>' class="code" style="width: 350px;" />
-		<?php
-		
-	}
 
 	public function output_escaped_fragment_meta() {
 
@@ -314,16 +306,6 @@ class UserDeck {
 								</form>
 							<?php endif; ?>
 						<?php endif; ?>
-						
-						<div class="postbox">
-							<h3 class="hndle" style="cursor: auto;"><span>Copy Shortcode</h3>
-							
-							<div class="inside">
-								<p>Copy the Guides shortcode to any of your pages or posts.</p>
-								
-								<?php $this->output_guides_shortcode($guides_key) ?>
-							</div>
-						</div>
 					</div>
 				</div>
 			<?php else: ?>
