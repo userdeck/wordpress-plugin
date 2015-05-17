@@ -239,15 +239,17 @@ class UserDeck {
 			<?php if ($show_guides_options): ?>
 				<h2>Guides</h2>
 				
+				<p>Guides is a knowledge base widget that embeds inline into any page of your WordPress pages and inherits the styling and blends in.</p>
+				
 				<div id="poststuff">
 					<div class="postbox-container" style="width:65%;">
 						<?php if (current_user_can('publish_pages')) : ?>
 							<form method="post" action="options-general.php?page=userdeck">
 								<div class="postbox">
-									<h3 class="hndle" style="cursor: auto;"><span>Create a Page</span></h3>
+									<h3 class="hndle" style="cursor: auto;"><span>Create a Knowledge Base Page</span></h3>
 									
 									<div class="inside">
-										<p>Create a new page with the Guides shortcode.</p>
+										<p>Create a new page with the Guides knowledge base inline widget.</p>
 										
 										<table class="form-table">
 											<tbody>
@@ -256,7 +258,9 @@ class UserDeck {
 														<label for="page-title">Page Title</label>
 													</th>
 													<td>
-														<input name="page_title" type="text" value="" id="page-title" />
+														<input name="page_title" type="text" value="" placeholder="Support" id="page-title" />
+														<br class="clear">
+														<p class="description">The title of the new knowledge base page to create.</p>
 													</td>
 												</tr>
 											</tbody>
@@ -276,16 +280,16 @@ class UserDeck {
 							<?php if (count($pages) > 0): ?>
 								<form method="post" action="options-general.php?page=userdeck">
 									<div class="postbox">
-										<h3 class="hndle" style="cursor: auto;"><span>Add to Page</span></h3>
+										<h3 class="hndle" style="cursor: auto;"><span>Add Knowledge Base to Page</span></h3>
 										
 										<div class="inside">
-											<p>Add the Guides shortcode to an existing page.</p>
+											<p>Add the Guides knowledge base inline widget to an existing page.</p>
 											
 											<table class="form-table">
 												<tbody>
 													<tr valign="top">
 														<th scope="row">
-															<label for="page-id">Page Title</label>
+															<label for="page-id">Page</label>
 														</th>
 														<td>
 															<select name="page_id" id="page-id">
@@ -293,6 +297,8 @@ class UserDeck {
 																	<option value="<?php echo $id ?>"><?php echo $title ?></option>
 																<?php endforeach; ?>
 															</select>
+															<br class="clear">
+															<p class="description">The title of the existing page to update with a knowledge base.</p>
 														</td>
 													</tr>
 												</tbody>
