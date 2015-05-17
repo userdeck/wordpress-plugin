@@ -105,18 +105,15 @@ class UserDeck {
 			
 			$content = str_replace('/g/'.$guides_key.'/', get_permalink().'#!', $content);
 
-			echo $content;
-
 		}
 		else {
 			
-			?>
+			$content = sprintf('<a href="http://userdeck.com" data-userdeck-guides="%s">Customer Support Software</a>', $guides_key);
+			$content .= '<script src="//widgets.userdeck.com/guides.js"></script>';
 			
-			<a href="http://userdeck.com" data-userdeck-guides="<?php echo $guides_key ?>">Customer Support Software</a>
-			<script src="//widgets.userdeck.com/guides.js"></script>
-			
-			<?php
 		}
+		
+		return $content;
 		
 	}
 	
