@@ -101,7 +101,13 @@ class UserDeck {
 	 */
 	public function get_settings() {
 		
-		return get_option( 'userdeck', array('guides_key' => null) );
+		$defaults = array('guides_key' => null);
+		
+		$options = get_option( 'userdeck', $defaults );
+		
+		$options = wp_parse_args( $options, $defaults );
+		
+		return $options;
 		
 	}
 
