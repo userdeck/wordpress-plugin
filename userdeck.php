@@ -12,11 +12,26 @@ defined( 'ABSPATH' ) or die();
 
 class UserDeck {
 	
+	protected $guide_page;
+	
 	/**
 	 * class constructor
 	 * register the activation and de-activation hooks and hook into a bunch of actions
 	 */
 	public function __construct() {
+		
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		
+		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
+		
+			$this->guide_page = $this->get_guide_page();
+		
+			global $wpseo_sitemaps;
+			$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+			
+			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
+			
+		}
 		
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
@@ -67,11 +82,83 @@ class UserDeck {
 
 	}
 	
+	public function get_guide_page()
+	{
+		
+		$posts = get_posts(array(
+			'post_type' => 'page',
+			'meta_key' => 'userdeck_guides_key',
+			'posts_per_page' => 1,
+		));
+		
+		if (!empty($posts)) {
+			return $posts[0];
+		}
+		
+		return null;
+		
+	}
+	
+	public function register_sitemap_index( $xml ) {
+		
+		global $wpseo_sitemaps;
+		
+		$post = $this->guide_page;
+		
+		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
+
+		$sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
+
+		$request = wp_remote_get( $sitemap_url );
+
+		$sitemap = '';
+
+		if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
+			$sitemap = wp_remote_retrieve_body( $request );
+		}
+		
+		preg_match('/'.preg_quote('<url><loc>https://userdeck.net/g/'.$guides_key.'</loc><lastmod>', '/').'(.*?)'.preg_quote('</lastmod><changefreq>', '/').'(.*?)'.preg_quote('</changefreq><priority>', '/').'(.*?)'.preg_quote('</priority></url>', '/').'/', $sitemap, $matches);
+		
+		$xml .= '<sitemap>
+				<loc>' . wpseo_xml_sitemaps_base_url('userdeck-sitemap.xml' ) . '</loc>
+				<lastmod>'.$matches[1].'</lastmod>
+				</sitemap>';
+		
+		return $xml;
+		
+	}
+	
+	public function register_sitemap() {
+		
+		global $wpseo_sitemaps;
+		
+		$post = $this->guide_page;
+		
+		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
+
+		$sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
+
+		$request = wp_remote_get( $sitemap_url );
+
+		$sitemap = '';
+
+		if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
+			$sitemap = wp_remote_retrieve_body( $request );
+		}
+		
+		$sitemap = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $sitemap);
+		$sitemap = preg_replace('/'.preg_quote('<url><loc>https://userdeck.net/g/'.$guides_key.'</loc><lastmod>', '/').'(.*?)'.preg_quote('</lastmod><changefreq>', '/').'(.*?)'.preg_quote('</changefreq><priority>', '/').'(.*?)'.preg_quote('</priority></url>', '/').'/', '', $sitemap);
+		$sitemap = str_replace('https://userdeck.net/g/'.$guides_key.'/', rtrim(get_permalink($post->ID), '/').'#!', $sitemap);
+		
+		$wpseo_sitemaps->set_sitemap( $sitemap );
+		
+	}
+	
 	public function output_guides_page( $content ) {
 		
 		global $post;
 		
-		if ( isset( $post ) && is_singular() ) {
+		if ( isset( $post ) && is_page() ) {
 		
 			$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
 			
