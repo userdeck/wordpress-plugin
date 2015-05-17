@@ -10,7 +10,7 @@ To setup, first [signup to UserDeck](http://userdeck.com?utm_source=github&utm_m
 
 Next, install the plugin into WordPress and you will be asked to connect to UserDeck on the settings page.
 
-Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
+Choose one of the integration methods for Guides on the page by either creating a new page or by adding to an existing page.
 
 ## Features
 

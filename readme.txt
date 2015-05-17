@@ -31,7 +31,7 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the Plugins menu in WordPress.
 3. Go to the settings page.
 4. Connect to UserDeck.
-5. Choose one of the integration methods for Guides on the page by either creating a new page, adding to an existing page, or copying the shortcode manually.
+5. Choose one of the integration methods for Guides on the page by either creating a new page or by adding to an existing page.
 
 == Screenshots ==
 
