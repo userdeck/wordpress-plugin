@@ -242,7 +242,7 @@ class UserDeck {
 
 		global $post;
 		
-		if ( isset( $post ) && is_singular() && has_shortcode( $post->post_content, 'userdeck_guides' ) ) {
+		if ( isset( $post ) && is_page() && has_shortcode( $post->post_content, 'userdeck_guides' ) ) {
 			?>
 			<meta name="fragment" content="!">
 			<?php
