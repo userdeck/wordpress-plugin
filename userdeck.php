@@ -329,7 +329,7 @@ class UserDeck {
 						<div class="error" id="userdeck-notice">
 							<p>
 								<strong>UserDeck is not setup</strong>.
-								Please <a href="options-general.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
+								Please <a href="admin.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
 							</p>
 						</div>
 					<?php
@@ -387,7 +387,7 @@ class UserDeck {
 				<div id="poststuff">
 					<div class="postbox-container" style="width:65%;">
 						<?php if (current_user_can('publish_pages')) : ?>
-							<form method="post" action="options-general.php?page=userdeck">
+							<form method="post" action="admin.php?page=userdeck">
 								<div class="postbox">
 									<h3 class="hndle" style="cursor: auto;"><span>Create a Knowledge Base Page</span></h3>
 									
@@ -421,7 +421,7 @@ class UserDeck {
 						
 						<?php if (current_user_can('edit_pages')) : ?>
 							<?php if (count($pages) > 0): ?>
-								<form method="post" action="options-general.php?page=userdeck">
+								<form method="post" action="admin.php?page=userdeck">
 									<div class="postbox">
 										<h3 class="hndle" style="cursor: auto;"><span>Add Knowledge Base to Page</span></h3>
 										
@@ -501,7 +501,7 @@ class UserDeck {
 
 				<script type="text/javascript">
 					var plugin_settings_nonce = "<?php echo wp_create_nonce('userdeck-options'); ?>";
-					var plugin_url = "<?php echo get_admin_url() . add_query_arg( array('page' => 'userdeck'), 'options-general.php' ); ?>";
+					var plugin_url = "<?php echo get_admin_url() . add_query_arg( array('page' => 'userdeck'), 'admin.php' ); ?>";
 				</script>
 				
 				<style type="text/css">
@@ -553,7 +553,7 @@ class UserDeck {
 							
 							update_post_meta( $page_id, 'userdeck_guides_key', $guides_key );
 							
-							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id), 'admin.php' ) );
 							exit;
 						}
 					}
@@ -569,7 +569,7 @@ class UserDeck {
 						if (!empty($page_id) && !empty($guides_key)) {
 							update_post_meta( $page_id, 'userdeck_guides_key', $guides_key );
 							
-							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'options-general.php' ) );
+							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id), 'admin.php' ) );
 							exit;
 						}
 					}
@@ -594,7 +594,7 @@ class UserDeck {
 	
 	public function add_action_links( $links ) {
 		
-		$settings_link = '<a href="options-general.php?page=userdeck">Settings</a>';
+		$settings_link = '<a href="admin.php?page=userdeck">Settings</a>';
 		
 		array_unshift( $links, $settings_link );
 		
