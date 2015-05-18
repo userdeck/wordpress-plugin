@@ -52,6 +52,8 @@ class UserDeck {
 		$plugin = plugin_basename(__FILE__);
 		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
 		
+		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 4 );
+		
 	}
 	
 	public function install() {}
@@ -597,6 +599,20 @@ class UserDeck {
 		$settings_link = '<a href="'.admin_url('admin.php?page=userdeck').'">Settings</a>';
 		
 		array_unshift( $links, $settings_link );
+		
+		return $links;
+		
+	}
+	
+	public function add_plugin_meta_links( $links, $plugin_file ) {
+		
+		$plugin = plugin_basename(__FILE__);
+			
+		if ( $plugin == $plugin_file ) {
+			$support_link = '<a href="http://userdeck.com/support" target="_blank">Support</a>';
+			
+			array_push( $links, $support_link );
+		}
 		
 		return $links;
 		
