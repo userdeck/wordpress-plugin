@@ -541,10 +541,7 @@ class UserDeck {
 				if ( isset( $_POST['userdeck-page-create'] ) ) {
 					if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-create' ) ) {
 						$page_title = wp_kses( trim( $_POST['page_title'] ), array() );
-						
-						$options = $this->get_settings();
-			
-						$guides_key = $options['guides_key'];
+						$guides_key = $_POST['guides_key'];
 						
 						if (!empty($page_title) && !empty($guides_key)) {
 							$page_id = wp_insert_post( array(
@@ -568,10 +565,7 @@ class UserDeck {
 				if ( isset( $_POST['userdeck-page-add'] ) ) {
 					if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-add' ) ) {
 						$page_id = absint( $_POST['page_id'] );
-						
-						$options = $this->get_settings();
-			
-						$guides_key = $options['guides_key'];
+						$guides_key = $_POST['guides_key'];
 						
 						if (!empty($page_id) && !empty($guides_key)) {
 							update_post_meta( $page_id, 'userdeck_guides_key', $guides_key );
