@@ -329,7 +329,7 @@ class UserDeck {
 						<div class="error" id="userdeck-notice">
 							<p>
 								<strong>UserDeck is not setup</strong>.
-								Please <a href="admin.php?page=userdeck">configure the UserDeck settings</a> to use the plugin.
+								Please <a href="<?php echo admin_url('admin.php?page=userdeck') ?>">configure the UserDeck settings</a> to use the plugin.
 							</p>
 						</div>
 					<?php
@@ -387,7 +387,7 @@ class UserDeck {
 				<div id="poststuff">
 					<div class="postbox-container" style="width:65%;">
 						<?php if (current_user_can('publish_pages')) : ?>
-							<form method="post" action="admin.php?page=userdeck">
+							<form method="post" action="<?php echo admin_url('admin.php?page=userdeck') ?>">
 								<div class="postbox">
 									<h3 class="hndle" style="cursor: auto;"><span>Create a Knowledge Base Page</span></h3>
 									
@@ -421,7 +421,7 @@ class UserDeck {
 						
 						<?php if (current_user_can('edit_pages')) : ?>
 							<?php if (count($pages) > 0): ?>
-								<form method="post" action="admin.php?page=userdeck">
+								<form method="post" action="<?php echo admin_url('admin.php?page=userdeck') ?>">
 									<div class="postbox">
 										<h3 class="hndle" style="cursor: auto;"><span>Add Knowledge Base to Page</span></h3>
 										
@@ -594,7 +594,7 @@ class UserDeck {
 	
 	public function add_action_links( $links ) {
 		
-		$settings_link = '<a href="admin.php?page=userdeck">Settings</a>';
+		$settings_link = '<a href="'.admin_url('admin.php?page=userdeck').'">Settings</a>';
 		
 		array_unshift( $links, $settings_link );
 		
