@@ -37,23 +37,34 @@ This section describes how to install the plugin and get it working.
 2. UserDeck Guides widget
 3. UserDeck control panel
 
+== Upgrade Notice ==
+
+= 1.0.6 =
+Added migrating all Guide pages from shortcodes to post meta.
+
+= 1.0.4 =
+Switched to using post meta for attaching Guides to pages and sitemap integration with the Yoast WordPress SEO plugin.
+
+= 1.0.3 =
+Added automated SEO support for Guide pages.
+
 == Changelog ==
 
 = 1.0.6 =
-* Added migrating guide shortcodes to post meta
+* Added migrating all Guide pages shortcodes to post meta
 
 = 1.0.4 =
-* Switched from shortcodes to post meta to attach Guides to posts
+* Switched from shortcodes to post meta to attach Guides to pages
 * Added sitemap integration with the Yoast WordPress SEO plugin
 
 = 1.0.3 =
-* Added automated SEO support
+* Added automated SEO support for Guide pages
 
 = 1.0.2 =
-* Changed iframe to use ssl
+* Switched to using SSL for connect flow on plugin settings page
 
 = 1.0.1 =
-* Improved connect flows
+* Improved connect flows on plugin settings page
 
 = 1.0.0 =
 * Initial release
