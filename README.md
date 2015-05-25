@@ -16,12 +16,9 @@ Choose one of the integration methods for Guides on the page by either creating 
 
 ### Guides
 
-Guides is a knowledge base widget that embeds inline to any page of your WordPress website.
-
-It inherits your theme's design and blends right in.
-
-You can embed a collection, category, or a single article instead of an entire knowledge base.
-
-Your users will save time by finding answers to common questions through self service.
+* A knowledge base widget that embeds inline to any page of your WordPress website.
+* It inherits your theme's design and blends right in.
+* You can embed a collection, category, or a single article instead of an entire knowledge base.
+* Your users will save time by finding answers to common questions through self service.
 
 [Learn more about Guides](http://userdeck.com/guides?utm_source=github&utm_medium=link&utm_campaign=website)

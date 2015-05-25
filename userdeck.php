@@ -480,21 +480,20 @@ class UserDeck {
 
 					<h3>Guides</h3>
 
-					<p>
-						A knowledge base widget that embeds inline to any page of your WordPress website.
-					</p>
-
-					<p>
-						It inherits your theme's design and blends right in.
-					</p>
-
-					<p>
-						You can embed a collection, category, or a single article instead of an entire knowledge base.
-					</p>
-
-					<p>
-						Your users will save time by finding answers to common questions through self service.
-					</p>
+					<ul>
+						<li>
+							A knowledge base widget that embeds inline to any page of your WordPress website.
+						</li>
+						<li>
+							It inherits your theme's design and blends right in.
+						</li>
+						<li>
+							You can embed a collection, category, or a single article instead of an entire knowledge base.
+						</li>
+						<li>
+							Your users will save time by finding answers to common questions through self service.
+						</li>
+					</ul>
 
 					<p>
 						<a href="http://userdeck.com/guides?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about Guides</a>
@@ -509,6 +508,7 @@ class UserDeck {
 				<style type="text/css">
 					#button-connect { margin: 40px 0; }
 					#iframe-guides { display: none; box-shadow: 0 1px 1px rgba(0,0,0,.04); border: 1px solid #e5e5e5; padding: 2px; background: #fff; }
+					#feature-wrapper ul { list-style-type: disc; padding-left: 20px; }
 				</style>
 			<?php endif; ?>
 		</div>
