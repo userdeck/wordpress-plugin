@@ -91,9 +91,7 @@ class UserDeck {
 			}
 		}
 		
-		$options['migrate_guides_shortcodes'] = 1;
-		
-		$this->update_settings($options);
+		$this->update_settings(array('migrate_guides_shortcodes' => 1));
 		
 	}
 	
@@ -119,6 +117,8 @@ class UserDeck {
 	 * @return null
 	 */
 	public function update_settings( $options ) {
+		
+		$options = wp_parse_args($options, $this->get_settings());
 
 		update_option( 'userdeck', $options );
 
