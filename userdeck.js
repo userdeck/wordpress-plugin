@@ -27,6 +27,15 @@ var UserDeck = {
 		jQuery('#feature-wrapper').hide();
 	},
 	
+	updateSettings : function (options) {
+		options['userdeck-submit'] = 1;
+		options['_wpnonce'] = plugin_settings_nonce;
+		
+		jQuery.post(plugin_url, options, function () {
+			window.location.reload();
+		});
+	},
+	
 	_receiveMessage : function (event) {
 		if (event.data && 'string' === typeof event.data && 'ud:' == event.data.substr(0, 3)) {
 			var msg = jQuery.parseJSON(event.data.substr(3));
@@ -42,9 +51,7 @@ var UserDeck = {
 				
 				UserDeck.hideConnect();
 				
-				jQuery.post(plugin_url, {'userdeck-submit': 1, guides_key: guides_key, _wpnonce: plugin_settings_nonce}, function () {
-					window.location.reload();
-				});
+				UserDeck.updateSettings({guides_key: guides_key});
 			}
 		}
 	},
