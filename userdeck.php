@@ -124,8 +124,21 @@ class UserDeck {
 
 	}
 	
-	public function get_guide_page()
-	{
+	public function has_guide_meta() {
+		
+		global $post;
+		
+		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
+		
+		if (!empty($guides_key)) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	public function get_guide_page() {
 		
 		$posts = get_posts(array(
 			'post_type' => 'page',
@@ -284,7 +297,8 @@ class UserDeck {
 
 		global $post;
 		
-		if ( isset( $post ) && is_page() && has_shortcode( $post->post_content, 'userdeck_guides' ) ) {
+		if ( isset( $post ) && is_page() ) {
+			if ($this->has_guide_meta() || has_shortcode( $post->post_content, 'userdeck_guides' ))
 			?>
 			<meta name="fragment" content="!">
 			<?php
