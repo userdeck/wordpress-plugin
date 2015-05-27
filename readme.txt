@@ -14,6 +14,7 @@ Easily integrate UserDeck's embedded support software into your WordPress websit
 = Features =
 
 **Conversations**
+
 * A ticketing system to allow your customers to contact you through email and embedded widgets.
 * Inline widget can be used as a contact form or a ticket portal to let users manage tickets from inside the WordPress control panel.
 * Integrates with WordPress for authenticated sessions to track user name and email on tickets.
@@ -21,6 +22,7 @@ Easily integrate UserDeck's embedded support software into your WordPress websit
 [Learn more about Conversations](http://userdeck.com/conversations?utm_source=wordpress&utm_medium=link&utm_campaign=website)
 
 **Guides**
+
 * A knowledge base widget that embeds inline to any page of your WordPress website.
 * It inherits your theme's design and blends right in.
 * You can embed a collection, category, or a single article instead of an entire knowledge base.
