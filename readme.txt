@@ -1,6 +1,6 @@
 === UserDeck Customer Support ===
 Contributors: userdeck
-Tags: userdeck, customer support, customer service, knowledge base, faq, frequently asked questions, documentation, docs, widgets
+Tags: userdeck, customer support, customer service, help, support, helpdesk, help desk, ticket, ticketing, knowledge base, knowledgebase, faq, frequently asked questions, documentation, docs, answers, widgets, zendesk
 Requires at least: 3.7
 Tested up to: 4.2.2
 Stable tag: 1.1.0
