@@ -897,6 +897,26 @@ class UserDeck {
 		
 				<div id="feature-wrapper">
 					<h2>Features</h2>
+					
+					<h3>Converations</h3>
+
+					<ul>
+						<li>
+							A ticketing system to allow your customers to contact you through email and embedded widgets.
+						</li>
+						<li>
+							Inline widget can be used as a contact form or a ticket portal to let users manage tickets from inside the WordPress control panel.
+						</li>
+						<li>
+							Integrates with WordPress for authenticated sessions to track user name and email on tickets.
+						</li>
+					</ul>
+
+					<p>
+						<a href="http://userdeck.com/conversations?utm_source=wordpress&utm_medium=link&utm_campaign=website" target="_blank">Learn more about Conversations</a>
+					</p>
+					
+					<br>
 
 					<h3>Guides</h3>
 
