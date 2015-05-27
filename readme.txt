@@ -3,7 +3,7 @@ Contributors: userdeck
 Tags: userdeck, customer support, customer service, knowledge base, faq, frequently asked questions, documentation, docs, widgets
 Requires at least: 3.7
 Tested up to: 4.2.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
 
@@ -39,6 +39,9 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+= 1.0.7 =
+Fixed bug with SEO support for Guide pages.
+
 = 1.0.6 =
 Added migrating all Guide pages from shortcodes to post meta.
 
@@ -49,6 +52,9 @@ Switched to using post meta for attaching Guides to pages and sitemap integratio
 Added automated SEO support for Guide pages.
 
 == Changelog ==
+
+= 1.0.7 =
+* Fixed bug with SEO support for Guide pages
 
 = 1.0.6 =
 * Added migrating all Guide pages shortcodes to post meta
