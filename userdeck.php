@@ -572,7 +572,7 @@ class UserDeck {
 			$show_options = true;
 		}
 		
-		if ($account_key) {
+		if ($account_key && $mailbox_id) {
 			$show_conversations_options = true;
 		}
 		
