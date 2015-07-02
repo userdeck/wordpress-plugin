@@ -1,13 +1,5 @@
 var UserDeck = {
 	
-	connected: false,
-
-	account_key: null,
-
-	mailbox_id: null,
-	
-	guides_key: null,
-	
 	showConnect : function (type, start) {
 		var wrapper = jQuery('#connect-frame');
 		
@@ -52,28 +44,17 @@ var UserDeck = {
 			var msg = jQuery.parseJSON(event.data.substr(3));
 			var data = {};
 			
-			UserDeck.connected = true;
-			
 			if ('installDetected' == msg.event) {
 				data.account_key = msg.message.account_key;
 				data.mailbox_id = msg.message.mailbox_id;
 				data.guides_key = msg.message.guide_key;
-				
-				UserDeck.account_key = account_key;
-				UserDeck.mailbox_id = mailbox_id;
-				UserDeck.guides_key = guides_key;
 			}
 			else if ('conversationKeysDetected' == msg.event) {
 				data.account_key = msg.message.account_key;
 				data.mailbox_id = msg.message.mailbox_id;
-				
-				UserDeck.account_key = account_key;
-				UserDeck.mailbox_id = mailbox_id;
 			}
 			else if ('guideKeyDetected' == msg.event) {
 				data.guides_key = msg.message;
-				
-				UserDeck.guides_key = guides_key;
 			}
 			else {
 				return;
