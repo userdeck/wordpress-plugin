@@ -287,7 +287,13 @@ class UserDeck {
 					<?php
 				endif;
 				?>
+				<?php
+				if ( !empty($mailbox_id) ) :
+				?>
 				mailbox_id: '<?php echo $mailbox_id ?>',
+				<?php
+				endif;
+				?>
 				conversations_overlay: {"key":"<?php echo $account_key ?>","settings":{
 					<?php if ($hide_list): ?>
 					"hide_conversation_list":true
@@ -308,7 +314,7 @@ class UserDeck {
 	 * output the userdeck conversations inline javascript install code
 	 * @return null
 	 */
-	public function output_conversations_inline_code($account_key, $mailbox_id, $hide_list = true) {
+	public function output_conversations_inline_code($account_key, $mailbox_id = null, $hide_list = true) {
 		
 		ob_start();
 		?>
@@ -326,7 +332,13 @@ class UserDeck {
 					<?php
 				endif;
 				?>
+				<?php
+				if ( !empty($mailbox_id) ) :
+				?>
 				mailbox_id: '<?php echo $mailbox_id ?>'
+				<?php
+				endif;
+				?>
 			};
 
 			UserDeck.factory("conversations", {"key":"<?php echo $account_key ?>","settings":{
