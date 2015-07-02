@@ -50,58 +50,39 @@ var UserDeck = {
 	_receiveMessage : function (event) {
 		if (event.data && 'string' === typeof event.data && 'ud:' == event.data.substr(0, 3)) {
 			var msg = jQuery.parseJSON(event.data.substr(3));
+			var data = {};
+			
+			UserDeck.connected = true;
 			
 			if ('installDetected' == msg.event) {
-				var account_key = msg.message.account_key;
-				var mailbox_id = msg.message.mailbox_id;
-				var guides_key = msg.message.guide_key;
-				var data = {
-					account_key: account_key,
-					mailbox_id: mailbox_id,
-					guides_key: guides_key
-				};
-				
-				UserDeck.connected = true;
+				data.account_key = msg.message.account_key;
+				data.mailbox_id = msg.message.mailbox_id;
+				data.guides_key = msg.message.guide_key;
 				
 				UserDeck.account_key = account_key;
 				UserDeck.mailbox_id = mailbox_id;
 				UserDeck.guides_key = guides_key;
-				
-				UserDeck.disableConnect();
-				UserDeck.hideConnect();
-				
-				UserDeck.updateSettings(data);
 			}
 			else if ('conversationKeysDetected' == msg.event) {
-				var account_key = msg.message.account_key;
-				var mailbox_id = msg.message.mailbox_id;
-				var data = {
-					account_key: account_key,
-					mailbox_id: mailbox_id
-				};
-				
-				UserDeck.connected = true;
+				data.account_key = msg.message.account_key;
+				data.mailbox_id = msg.message.mailbox_id;
 				
 				UserDeck.account_key = account_key;
 				UserDeck.mailbox_id = mailbox_id;
-				
-				UserDeck.disableConnect();
-				UserDeck.hideConnect();
-				
-				UserDeck.updateSettings(data);
 			}
 			else if ('guideKeyDetected' == msg.event) {
-				var guides_key = msg.message;
-				
-				UserDeck.connected = true;
+				data.guides_key = msg.message;
 				
 				UserDeck.guides_key = guides_key;
-				
-				UserDeck.disableConnect();
-				UserDeck.hideConnect();
-				
-				UserDeck.updateSettings({guides_key: guides_key});
 			}
+			else {
+				return;
+			}
+			
+			UserDeck.disableConnect();
+			UserDeck.hideConnect();
+			
+			UserDeck.updateSettings(data);
 		}
 	},
 	
