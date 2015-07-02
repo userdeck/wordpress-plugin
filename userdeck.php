@@ -495,7 +495,7 @@ class UserDeck {
 
 			$options = $this->get_settings();
 
-			if ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) {
+			if ( ( !isset( $options['account_key'] ) || !$options['account_key'] ) && ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) ) {
 				if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
 					?>
 						<div class="error" id="userdeck-notice">
