@@ -3,7 +3,7 @@ Contributors: userdeck
 Tags: userdeck, customer support, customer service, help, support, helpdesk, help desk, ticket, ticketing, knowledge base, knowledgebase, faq, frequently asked questions, documentation, docs, answers, widgets, zendesk
 Requires at least: 3.7
 Tested up to: 4.2.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
 
@@ -48,6 +48,9 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+= 1.1.2 =
+Added support for multiple Mailboxes and Guides.
+
 = 1.1.1 =
 Fixed bug during connect flow.
 
@@ -67,6 +70,9 @@ Switched to using post meta for attaching Guides to pages and sitemap integratio
 Added automated SEO support for Guide pages.
 
 == Changelog ==
+
+= 1.1.2 =
+* Added support for multiple Mailboxes and Guides
 
 = 1.1.1 =
 * Fixed bug during connect flow
