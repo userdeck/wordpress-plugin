@@ -109,10 +109,11 @@ class UserDeck {
 		
 		$defaults = array(
 			'account_key' => null,
-			'mailbox_id' => null,
-			'guides_key' => null,
+			'mailboxes' => null,
+			'guides' => null,
 			'ticket_portal' => 0,
 			'overlay_widget' => 0,
+			'mailbox_id' => null,
 		);
 		
 		$options = get_option( 'userdeck', $defaults );
@@ -495,7 +496,7 @@ class UserDeck {
 
 			$options = $this->get_settings();
 
-			if ( ( !isset( $options['account_key'] ) || !$options['account_key'] ) && ( !isset( $options['guides_key'] ) || !$options['guides_key'] ) ) {
+			if ( ( !isset( $options['account_key'] ) || !$options['account_key'] ) && ( !isset( $options['guides'] ) || !$options['guides'] ) ) {
 				if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
 					?>
 						<div class="error" id="userdeck-notice">
@@ -571,24 +572,25 @@ class UserDeck {
 		}
 
 		$account_key = $options['account_key'];
-		$mailbox_id = $options['mailbox_id'];
-		$guides_key = $options['guides_key'];
+		$mailboxes = $options['mailboxes'];
+		$guides = $options['guides'];
 		$ticket_portal = $options['ticket_portal'];
 		$overlay_widget = $options['overlay_widget'];
+		$mailbox_id = $options['mailbox_id'];
 		
 		$show_options = false;
 		$show_conversations_options = false;
 		$show_guides_options = false;
 		
-		if ($account_key || $guides_key) {
+		if ($account_key || $guides) {
 			$show_options = true;
 		}
 		
-		if ($account_key && $mailbox_id) {
+		if ($account_key && $mailboxes) {
 			$show_conversations_options = true;
 		}
 		
-		if ($guides_key) {
+		if ($guides) {
 			$show_guides_options = true;
 		}
 
@@ -647,6 +649,21 @@ class UserDeck {
 															<p class="description">Enable to show an overlay widget which lets website visitors contact you on any page of your WordPress site and manage conversations.</p>
 														</td>
 													</tr>
+													<tr valign="top">
+														<th scope="row">
+															<label for="global-mailbox-name">Mailbox</label>
+														</th>
+														<td>
+															<select name="mailbox_id" id="global-mailbox-name">
+																<option value=""></option>
+																<?php foreach ($mailboxes as $mailbox): ?>
+																	<option value="<?php echo $mailbox['id'] ?>"<?php if ($mailbox_id == $mailbox['id']): ?> selected<?php endif; ?>><?php echo $mailbox['name'] ?></option>
+																<?php endforeach; ?>
+															</select>
+															<br class="clear">
+															<p class="description">The mailbox to use for ticket portal and overlay widgets.</p>
+														</td>
+													</tr>
 												</tbody>
 											</table>
 											
@@ -670,6 +687,21 @@ class UserDeck {
 													<tbody>
 														<tr valign="top">
 															<th scope="row">
+																<label for="conversations-mailbox-name-create">Mailbox</label>
+															</th>
+															<td>
+																<select name="mailbox_id" id="conversations-mailbox-name-create">
+																	<option value=""></option>
+																	<?php foreach ($mailboxes as $mailbox): ?>
+																		<option value="<?php echo $mailbox['id'] ?>"><?php echo $mailbox['name'] ?></option>
+																	<?php endforeach; ?>
+																</select>
+																<br class="clear">
+																<p class="description">The mailbox to use for the contact form page.</p>
+															</td>
+														</tr>
+														<tr valign="top">
+															<th scope="row">
 																<label for="conversations-page-title">Page Title</label>
 															</th>
 															<td>
@@ -684,7 +716,6 @@ class UserDeck {
 												<p>
 													<?php wp_nonce_field('userdeck-page-conversations-create'); ?>
 													<input type="hidden" name="account_key" value="<?php echo $account_key ?>" />
-													<input type="hidden" name="mailbox_id" value="<?php echo $mailbox_id ?>" />
 													<input class="button-primary" name="userdeck-page-conversations-create" type="submit" value="Create Page" />
 												</p>
 											</div>
@@ -705,6 +736,21 @@ class UserDeck {
 														<tbody>
 															<tr valign="top">
 																<th scope="row">
+																	<label for="conversations-mailbox-name-add">Mailbox</label>
+																</th>
+																<td>
+																	<select name="mailbox_id" id="conversations-mailbox-name-add">
+																		<option value=""></option>
+																		<?php foreach ($mailboxes as $mailbox): ?>
+																			<option value="<?php echo $mailbox['id'] ?>"><?php echo $mailbox['name'] ?></option>
+																		<?php endforeach; ?>
+																	</select>
+																	<br class="clear">
+																	<p class="description">The mailbox to use for the contact form page.</p>
+																</td>
+															</tr>
+															<tr valign="top">
+																<th scope="row">
 																	<label for="conversations-page-id">Page</label>
 																</th>
 																<td>
@@ -723,7 +769,6 @@ class UserDeck {
 													<p>
 														<?php wp_nonce_field('userdeck-page-conversations-add'); ?>
 														<input type="hidden" name="account_key" value="<?php echo $account_key ?>" />
-														<input type="hidden" name="mailbox_id" value="<?php echo $mailbox_id ?>" />
 														<input class="button-primary" name="userdeck-page-conversations-add" type="submit" value="Add to Page" />
 													</p>
 												</div>
@@ -791,6 +836,20 @@ class UserDeck {
 													<tbody>
 														<tr valign="top">
 															<th scope="row">
+																<label for="guides-name-create">Guide</label>
+															</th>
+															<td>
+																<select name="guides_key" id="guides-name-create">
+																	<?php foreach ($guides as $guide): ?>
+																		<option value="<?php echo $guide['key'] ?>"><?php echo $guide['name'] ?></option>
+																	<?php endforeach; ?>
+																</select>
+																<br class="clear">
+																<p class="description">The guide to use for the knowledge base page.</p>
+															</td>
+														</tr>
+														<tr valign="top">
+															<th scope="row">
 																<label for="guides-page-title">Page Title</label>
 															</th>
 															<td>
@@ -804,7 +863,6 @@ class UserDeck {
 												
 												<p>
 													<?php wp_nonce_field('userdeck-page-guides-create'); ?>
-													<input type="hidden" name="guides_key" value="<?php echo $guides_key ?>" />
 													<input class="button-primary" name="userdeck-page-guides-create" type="submit" value="Create Page" />
 												</p>
 											</div>
@@ -825,6 +883,20 @@ class UserDeck {
 														<tbody>
 															<tr valign="top">
 																<th scope="row">
+																	<label for="guides-name-add">Guide</label>
+																</th>
+																<td>
+																	<select name="guides_key" id="guides-name-add">
+																		<?php foreach ($guides as $guide): ?>
+																			<option value="<?php echo $guide['key'] ?>"><?php echo $guide['name'] ?></option>
+																		<?php endforeach; ?>
+																	</select>
+																	<br class="clear">
+																	<p class="description">The guide to use for the knowledge base page.</p>
+																</td>
+															</tr>
+															<tr valign="top">
+																<th scope="row">
 																	<label for="guides-page-id">Page</label>
 																</th>
 																<td>
@@ -842,7 +914,6 @@ class UserDeck {
 													
 													<p>
 														<?php wp_nonce_field('userdeck-page-guides-add'); ?>
-														<input type="hidden" name="guides_key" value="<?php echo $guides_key ?>" />
 														<input class="button-primary" name="userdeck-page-guides-add" type="submit" value="Add to Page" />
 													</p>
 												</div>
@@ -990,12 +1061,12 @@ class UserDeck {
 						$options['account_key'] = $_POST['account_key'];
 					}
 					
-					if ( isset( $_POST['mailbox_id'] ) ) {
-						$options['mailbox_id'] = $_POST['mailbox_id'];
+					if ( isset( $_POST['mailboxes'] ) ) {
+						$options['mailboxes'] = $_POST['mailboxes'];
 					}
 					
-					if ( isset( $_POST['guides_key'] ) ) {
-						$options['guides_key'] = $_POST['guides_key'];
+					if ( isset( $_POST['guides'] ) ) {
+						$options['guides'] = $_POST['guides'];
 					}
 					
 					$options = $this->validate_settings( $options );
@@ -1024,6 +1095,7 @@ class UserDeck {
 					
 					$options['ticket_portal'] = $ticket_portal;
 					$options['overlay_widget'] = $overlay_widget;
+					$options['mailbox_id'] = $_POST['mailbox_id'];
 					
 					$this->update_settings($options);
 					

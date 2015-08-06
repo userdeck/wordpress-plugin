@@ -46,15 +46,15 @@ var UserDeck = {
 			
 			if ('installDetected' == msg.event) {
 				data.account_key = msg.message.account_key;
-				data.mailbox_id = msg.message.mailbox_id;
-				data.guides_key = msg.message.guide_key;
+				data.mailboxes = msg.message.mailboxes;
+				data.guides = msg.message.guides;
 			}
 			else if ('conversationKeysDetected' == msg.event) {
 				data.account_key = msg.message.account_key;
-				data.mailbox_id = msg.message.mailbox_id;
+				data.mailboxes = msg.message.mailboxes;
 			}
 			else if ('guideKeyDetected' == msg.event) {
-				data.guides_key = msg.message;
+				data.guides = msg.message.guides;
 			}
 			else {
 				return;
