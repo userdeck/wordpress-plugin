@@ -43,8 +43,10 @@ This section describes how to install the plugin and get it working.
 == Screenshots ==
 
 1. UserDeck plugin page
-2. UserDeck Guides widget
-3. UserDeck control panel
+2. UserDeck Conversations widget
+3. UserDeck Guides widget
+4. UserDeck control panel
+5. UserDeck control panel
 
 == Upgrade Notice ==
 
