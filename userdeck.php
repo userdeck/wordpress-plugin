@@ -250,7 +250,7 @@ class UserDeck {
 			$account_key = get_post_meta($post->ID, 'userdeck_account_key', true);
 			$mailbox_id = get_post_meta($post->ID, 'userdeck_mailbox_id', true);
 			
-			if (!empty($account_key) && !empty($mailbox_id)) {
+			if (!empty($account_key)) {
 				return $this->output_conversations_inline_code($account_key, $mailbox_id, $hide_list);
 			}
 			
@@ -1111,7 +1111,7 @@ class UserDeck {
 						$account_key = $_POST['account_key'];
 						$mailbox_id = $_POST['mailbox_id'];
 						
-						if (!empty($page_title) && !empty($account_key) && !empty($mailbox_id)) {
+						if (!empty($page_title) && !empty($account_key)) {
 							$page_id = wp_insert_post( array(
 								'post_title'     => $page_title,
 								'post_status'    => 'publish',
@@ -1121,7 +1121,10 @@ class UserDeck {
 							) );
 							
 							update_post_meta( $page_id, 'userdeck_account_key', $account_key );
-							update_post_meta( $page_id, 'userdeck_mailbox_id', $mailbox_id );
+							
+							if (!empty($mailbox_id)) {
+								update_post_meta( $page_id, 'userdeck_mailbox_id', $mailbox_id );
+							}
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_added' => 1, 'page_id' => $page_id, 'tab' => 'conversations'), 'admin.php' ) );
 							exit;
@@ -1156,11 +1159,14 @@ class UserDeck {
 					if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'userdeck-page-conversations-add' ) ) {
 						$page_id = absint( $_POST['page_id'] );
 						$account_key = $_POST['account_key'];
-						$mailbox_id = absint( $_POST['mailbox_id'] );
+						$mailbox_id = $_POST['mailbox_id'];
 						
-						if (!empty($page_id) && !empty($account_key) && !empty($mailbox_id)) {
+						if (!empty($page_id) && !empty($account_key)) {
 							update_post_meta( $page_id, 'userdeck_account_key', $account_key );
-							update_post_meta( $page_id, 'userdeck_mailbox_id', $mailbox_id );
+							
+							if (!empty($mailbox_id)) {
+								update_post_meta( $page_id, 'userdeck_mailbox_id', $mailbox_id );
+							}
 							
 							wp_redirect( add_query_arg( array('page' => 'userdeck', 'page_updated' => 1, 'page_id' => $page_id, 'tab' => 'conversations'), 'admin.php' ) );
 							exit;
