@@ -306,7 +306,7 @@ class UserDeck {
 			a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(document,'script','//widgets.userdeck.com/conversations.js');
 			</script>
-			<noscript><a href="http://userdeck.com">Customer Support Software</a></noscript>', $mailbox_id, $account_key);
+			<noscript><a href="http://userdeck.com">Customer Support Software</a></noscript>
 		<?php
 		
 	}
