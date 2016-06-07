@@ -3,7 +3,7 @@
  * Plugin Name: UserDeck
  * Plugin URI: http://wordpress.org/plugins/userdeck
  * Description: Embedded customer support from <a href="http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website">UserDeck</a> that embeds into your website.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: UserDeck
  * Author URI: http://userdeck.com?utm_source=wordpress&utm_medium=link&utm_campaign=website
  */
@@ -29,7 +29,7 @@ class UserDeck {
 			global $wpseo_sitemaps;
 			
 			if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
-			$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+				$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
 			}
 			
 			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
@@ -241,7 +241,7 @@ class UserDeck {
 		$sitemap = str_replace('https://userdeck.net/g/'.$guides_key.'/', rtrim(get_permalink($post->ID), '/').'#!', $sitemap);
 		
 		if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'set_sitemap' ) ) {
-		$wpseo_sitemaps->set_sitemap( $sitemap );
+			$wpseo_sitemaps->set_sitemap( $sitemap );
 		}
 		
 	}

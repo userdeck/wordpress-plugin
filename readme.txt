@@ -3,7 +3,7 @@ Contributors: userdeck
 Tags: userdeck, customer support, customer service, help, support, helpdesk, help desk, ticket, ticketing, knowledge base, knowledgebase, faq, frequently asked questions, documentation, docs, answers, widgets, zendesk
 Requires at least: 3.7
 Tested up to: 4.5
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
 
@@ -50,6 +50,9 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+= 1.1.4 =
+Fixed bug with incompatible versions with the Yoast WordPress SEO plugin used for sitemap integration.
+
 = 1.1.3 =
 Fixed bug preventing conversations inline widget setup if mailbox wasn't chosen.
 Fixed bug showing random characters when rendering conversation overlay widget.
@@ -76,6 +79,9 @@ Switched to using post meta for attaching Guides to pages and sitemap integratio
 Added automated SEO support for Guide pages.
 
 == Changelog ==
+
+= 1.1.4 =
+* Fixed bug with incompatible versions with the Yoast WordPress SEO plugin used for sitemap integration
 
 = 1.1.3 =
 * Fixed bug preventing conversations inline widget setup if mailbox wasn't chosen
