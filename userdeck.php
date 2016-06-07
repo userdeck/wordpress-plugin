@@ -27,7 +27,10 @@ class UserDeck {
 			$this->guide_page = $this->get_guide_page();
 		
 			global $wpseo_sitemaps;
+			
+			if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
 			$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+			}
 			
 			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
 			
@@ -237,7 +240,9 @@ class UserDeck {
 		$sitemap = preg_replace('/'.preg_quote('<url><loc>https://userdeck.net/g/'.$guides_key.'</loc><lastmod>', '/').'(.*?)'.preg_quote('</lastmod><changefreq>', '/').'(.*?)'.preg_quote('</changefreq><priority>', '/').'(.*?)'.preg_quote('</priority></url>', '/').'/', '', $sitemap);
 		$sitemap = str_replace('https://userdeck.net/g/'.$guides_key.'/', rtrim(get_permalink($post->ID), '/').'#!', $sitemap);
 		
+		if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'set_sitemap' ) ) {
 		$wpseo_sitemaps->set_sitemap( $sitemap );
+		}
 		
 	}
 	
