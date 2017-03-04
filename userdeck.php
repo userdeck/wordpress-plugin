@@ -41,22 +41,16 @@ class UserDeck {
 		$this->plugin_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
 		$this->plugin_url = trailingslashit( plugins_url( '', dirname( __FILE__ ) ) );
 		
-		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
-		
-			$this->guide_page = $this->get_guide_page();
-		
-			global $wpseo_sitemaps;
-			
-			if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
-				$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
-			}
-			
-			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
-			
-		}
-		
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
+		
+		$this->add_actions();
+		$this->add_filters();
+		$this->add_shortcodes();
+		
+	}
+	
+	public function add_actions() {
 		
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'create_menu_page') );
@@ -67,20 +61,38 @@ class UserDeck {
 		}
 		
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 99 );
-
 		add_action( 'wp_head', array( $this, 'output_escaped_fragment_meta' ) );
-		
 		add_action( 'wp_footer', array( $this, 'output_conversations_overlay_code' ) );
+		
+	}
+	
+	public function add_filters() {
+		
+		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
+			
+			$this->guide_page = $this->get_guide_page();
+			
+			global $wpseo_sitemaps;
+			
+			if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
+				$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+			}
+			
+			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
+			
+		}
 		
 		add_filter( 'the_content', array( $this, 'output_conversations_page' ) );
 		add_filter( 'the_content', array( $this, 'output_guides_page' ) );
 		
-		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_shortcode') );
-		
 		$plugin = plugin_basename(__FILE__);
-		add_filter("plugin_action_links_$plugin", array($this, 'add_action_links'));
-		
+		add_filter( "plugin_action_links_$plugin", array( $this, 'add_action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 4 );
+	}
+	
+	public function add_shortcodes() {
+		
+		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_shortcode') );
 		
 	}
 	
