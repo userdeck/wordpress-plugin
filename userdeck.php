@@ -13,6 +13,8 @@ defined( 'ABSPATH' ) or die();
 class UserDeck {
 	
 	protected static $instance;
+	protected $plugin_path;
+	protected $plugin_url;
 	protected $guide_page;
 	
 	/**
@@ -35,6 +37,9 @@ class UserDeck {
 	public function __construct() {
 		
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		
+		$this->plugin_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
+		$this->plugin_url = trailingslashit( plugins_url( '', dirname( __FILE__ ) ) );
 		
 		if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
 		
