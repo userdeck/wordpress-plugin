@@ -15,6 +15,7 @@ class UserDeck {
 	protected static $instance;
 	protected $plugin_path;
 	protected $plugin_url;
+	protected $admin_notices = array();
 	protected $guide_page;
 	
 	/**
@@ -57,7 +58,8 @@ class UserDeck {
 			add_action( 'admin_menu', array( $this, 'create_tickets_page' ) );
 			add_action( 'admin_init', array( $this, 'settings_init') );
 			add_action( 'admin_init', array( $this, 'migrate_guides_shortcodes') );
-			add_action( 'admin_notices', array( $this, 'admin_notice') );
+			add_action( 'admin_init', array( $this, 'build_admin_notices') );
+			add_action( 'admin_notices', array( $this, 'render_admin_notices') );
 		}
 		
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 99 );
@@ -132,6 +134,25 @@ class UserDeck {
 		}
 		
 		$this->update_settings(array('migrate_guides_shortcodes' => 1));
+		
+	}
+	
+	public function add_admin_notice($type, $content) {
+		
+		array_unshift( $this->admin_notices, array(
+			'type' => $type,
+			'content' => $content,
+		) );
+		
+	}
+	
+	public function render_admin_notices() {
+	
+		foreach ($this->admin_notices as $notice) {
+			echo '<div class="' . $notice['type'] . '">';
+			echo '<p>' . $notice['content'] . '</p>';
+			echo '</div>';
+		}
 		
 	}
 	
@@ -494,54 +515,27 @@ class UserDeck {
 	 * and a friendly reminder if the app ID or secret key haven't been entered
 	 * @return null
 	 */
-	public function admin_notice() {
+	public function build_admin_notices() {
 		
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['settings_updated'] ) ) {
-			
-			?>
-			<div class="updated">
-				<p>Settings successfully saved.</p>
-			</div>
-			<?php
-			
+			$this->add_admin_notice( 'updated', 'Settings successfully saved.' );
 		}
 		
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_added'] ) ) {
-			
-			?>
-			<div class="updated">
-				<p>Page created. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
-			</div>
-			<?php
-			
+			$this->add_admin_notice( 'updated', sprintf( 'Page created. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) ) );
 		}
 		
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'userdeck' && isset( $_GET['page_updated'] ) ) {
-			
-			?>
-			<div class="updated">
-				<p>Page updated. <a href="<?php echo get_permalink($_GET['page_id']) ?>">View page</a></p>
-			</div>
-			<?php
-			
+			$this->add_admin_notice( 'updated', sprintf( 'Page updated. <a href="%s">View page</a>', get_permalink( $_GET['page_id'] ) ) );
 		}
 
 		// show a reminder to users who can update options
-
 		if ( current_user_can( 'manage_options' ) ) {
-
 			$options = $this->get_settings();
 
 			if ( ( !isset( $options['account_key'] ) || !$options['account_key'] ) && ( !isset( $options['guides'] ) || !$options['guides'] ) ) {
 				if ( !isset( $_GET['page'] ) || $_GET['page'] != 'userdeck' ) {
-					?>
-						<div class="error" id="userdeck-notice">
-							<p>
-								<strong>UserDeck is not setup</strong>.
-								Please <a href="<?php echo admin_url('admin.php?page=userdeck') ?>">configure the UserDeck settings</a> to use the plugin.
-							</p>
-						</div>
-					<?php
+					$this->add_admin_notice( 'error', sprintf( '<strong>UserDeck is not setup</strong>. Please <a href="%s">configure the UserDeck settings</a> to use the plugin.', admin_url( 'admin.php?page=userdeck' ) ) );
 				}
 			}
 		}
