@@ -100,8 +100,9 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 */
 		public function get_settings() {
 			
-			return get_option( 'userdeck', array('guides_key' => null) );
+			$settings = get_option( 'userdeck' );
 			
+			return array_merge($settings, array('guides_key' => null));
 		}
 
 		/**
@@ -166,7 +167,7 @@ if ( !class_exists( 'UserDeck' ) ) {
 		 */
 		public function create_admin_menu_items() {
 			
-			add_options_page('UserDeck', 'UserDeck', 'manage_options', self::SLUG, array($this, 'render_options_page'));
+			add_menu_page('UserDeck', 'UserDeck', 'manage_options', self::SLUG, array($this, 'render_options_page'));
 			
 		}
 		
