@@ -73,11 +73,15 @@ class UserDeck {
 			
 			global $wpseo_sitemaps;
 			
-			if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
-				$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+			if ( !empty( $this->guide_page ) ) {
+				
+				if ( $wpseo_sitemaps instanceof WPSEO_Sitemaps && method_exists( $wpseo_sitemaps, 'register_sitemap' ) ) {
+					$wpseo_sitemaps->register_sitemap('userdeck', array( $this, 'register_sitemap' ) );
+				}
+				
+				add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
+				
 			}
-			
-			add_filter( 'wpseo_sitemap_index', array( $this, 'register_sitemap_index' ) );
 			
 		}
 		
@@ -250,6 +254,10 @@ class UserDeck {
 		
 		$post = $this->guide_page;
 		
+		if ( empty( $post ) ) {
+			return '';
+		}
+		
 		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
 
 		$sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
@@ -278,6 +286,10 @@ class UserDeck {
 		global $wpseo_sitemaps;
 		
 		$post = $this->guide_page;
+		
+		if ( empty( $post ) ) {
+			return;
+		}
 		
 		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
 
