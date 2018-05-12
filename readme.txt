@@ -2,7 +2,7 @@
 Contributors: userdeck
 Tags: userdeck, customer support, customer service, help, support, helpdesk, help desk, ticket, ticketing, knowledge base, knowledgebase, faq, frequently asked questions, documentation, docs, answers, widgets, zendesk
 Requires at least: 3.7
-Tested up to: 4.7
+Tested up to: 4.9
 Stable tag: 1.1.4
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
