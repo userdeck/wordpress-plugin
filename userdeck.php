@@ -42,9 +42,6 @@ class UserDeck {
 		$this->plugin_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
 		$this->plugin_url = trailingslashit( plugins_url( '', dirname( __FILE__ ) ) );
 		
-		register_activation_hook( __FILE__, array( $this, 'install' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'uninstall' ) );
-		
 		$this->add_actions();
 		$this->add_filters();
 		$this->add_shortcodes();
@@ -98,9 +95,9 @@ class UserDeck {
 		
 	}
 	
-	public function install() {}
+	public static function install() {}
 	
-	public function uninstall() {
+	public static function uninstall() {
 		
 		delete_option('userdeck');
 		
@@ -838,3 +835,5 @@ function userdeck_init() {
 }
 
 add_action( 'init', 'userdeck_init', 0 );
+register_activation_hook( __FILE__, array( 'UserDeck', 'install' ) );
+register_uninstall_hook( __FILE__, array( 'UserDeck', 'uninstall' ) );
