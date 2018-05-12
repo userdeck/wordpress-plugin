@@ -95,9 +95,15 @@ class UserDeck {
 		
 	}
 	
-	public static function install() {}
+	public static function install() {
+		
+		self::track_event('install');
+		
+	}
 	
 	public static function uninstall() {
+		
+		self::track_event('uninstall');
 		
 		delete_option('userdeck');
 		
@@ -823,6 +829,30 @@ class UserDeck {
 		}
 		
 		return $links;
+		
+	}
+	
+	protected static function track_event( $event ) {
+		
+		$params = array(
+			'event'        => $event,
+			'site_url'     => get_site_url(),
+			'home_url'     => get_home_url(),
+			'version'      => get_bloginfo( 'version' ),
+			'site_lang'    => get_bloginfo( 'language' ),
+			'admin_email'  => get_option( 'admin_email' ),
+			'is_multisite' => is_multisite(),
+			'php_version'  => PHP_VERSION,
+		);
+		
+		wp_safe_remote_post( 'https://api.userdeck.com/webhooks/wordpress', array(
+			'timeout'   => 25,
+			'blocking'  => false,
+			'sslverify' => false,
+			'body'      => array(
+				'payload' => wp_json_encode( $params ),
+			),
+		) );
 		
 	}
 	
