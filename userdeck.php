@@ -192,14 +192,12 @@ class UserDeck {
 
 	}
 	
-	public function has_guide_meta() {
-		
-		global $post;
+	public function has_guide_meta( $post ) {
 		
 		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
 		
 		if (!empty($guides_key)) {
-			return true;
+			return $guides_key;
 		}
 		
 		return false;
@@ -247,12 +245,12 @@ class UserDeck {
 		
 		$post = $this->guide_page;
 		
-		if ( empty( $post ) ) {
+		$guides_key = $this->has_guide_meta( $post );
+		
+		if ( empty( $guides_key ) ) {
 			return '';
 		}
 		
-		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
-
 		$sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
 
 		$request = wp_remote_get( $sitemap_url );
@@ -280,11 +278,11 @@ class UserDeck {
 		
 		$post = $this->guide_page;
 		
-		if ( empty( $post ) ) {
+		$guides_key = $this->has_guide_meta( $post );
+		
+		if ( empty( $guides_key ) ) {
 			return;
 		}
-		
-		$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
 
 		$sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
 
@@ -427,7 +425,7 @@ class UserDeck {
 		
 		if ( isset( $post ) && is_page() ) {
 		
-			$guides_key = get_post_meta($post->ID, 'userdeck_guides_key', true);
+			$guides_key = $this->has_guide_meta( $post );
 			
 			if (!empty($guides_key)) {
 				return $this->output_guides_code($guides_key);
@@ -493,7 +491,7 @@ class UserDeck {
 		global $post;
 		
 		if ( isset( $post ) && is_page() ) {
-			if ( $this->has_guide_meta() )
+			if ( $this->has_guide_meta( $post ) )
 			?>
 			<meta name="fragment" content="!">
 			<?php
