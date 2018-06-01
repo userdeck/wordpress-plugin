@@ -44,7 +44,6 @@ class UserDeck {
 		
 		$this->add_actions();
 		$this->add_filters();
-		$this->add_shortcodes();
 		
 	}
 	
@@ -91,12 +90,6 @@ class UserDeck {
 		$plugin = plugin_basename(__FILE__);
 		add_filter( "plugin_action_links_$plugin", array( $this, 'add_action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 4 );
-	}
-	
-	public function add_shortcodes() {
-		
-		add_shortcode( 'userdeck_guides', array( $this, 'output_guides_shortcode') );
-		
 	}
 	
 	public static function install() {
@@ -446,17 +439,6 @@ class UserDeck {
 		
 	}
 	
-	public function output_guides_shortcode() {
-		
-		// retrieve the options
-		$options = $this->get_settings();
-		
-		$guides_key = $options['guides_key'];
-		
-		return $this->output_guides_code($guides_key);
-		
-	}
-	
 	/**
 	 * output the userdeck guides javascript install code
 	 * @return null
@@ -506,18 +488,12 @@ class UserDeck {
 		
 	}
 	
-	public function generate_guides_shortcode($guides_key) {
-		
-		return '[userdeck_guides key="'.$guides_key.'"]';
-		
-	}
-	
 	public function output_escaped_fragment_meta() {
 
 		global $post;
 		
 		if ( isset( $post ) && is_page() ) {
-			if ($this->has_guide_meta() || has_shortcode( $post->post_content, 'userdeck_guides' ))
+			if ( $this->has_guide_meta() )
 			?>
 			<meta name="fragment" content="!">
 			<?php
