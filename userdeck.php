@@ -460,18 +460,21 @@ class UserDeck {
 			}
 
 			$request = wp_remote_get( $base_uri . $path );
-
 			$content = '';
+			$body = '';
 
 			if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
 				$content = wp_remote_retrieve_body( $request );
 			}
 
-			preg_match('/\<body\>(.*?)\<\/body\>/is', $content, $body);
-			$body = $body[1];
+			if ( preg_match('/\<body\>(.*?)\<\/body\>/is', $content, $body ) ) {
+				$body = $body[1];
+			}
+			else {
+				$body = $content;
+			}
 			
 			$content = strstr($body, '<div class="content">');
-			
 			$content = str_replace('/g/'.$guides_key.'/', get_permalink().'#!', $content);
 
 		}
