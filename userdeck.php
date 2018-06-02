@@ -445,13 +445,9 @@ class UserDeck {
 		
 		$content = '';
 
-		if (isset( $_GET['_escaped_fragment_'] )) {
+		if ( $this->is_escaped_fragment_request() ) {
 
-			$path = '';
-
-			if ( $_GET['_escaped_fragment_'] ) {
-				$path = $_GET['_escaped_fragment_'][0] == '/' ? substr( $_GET['_escaped_fragment_'], 1 ) : $_GET['_escaped_fragment_'];
-			}
+			$path = $this->escaped_fragment_path();
 
 			$base_uri = 'https://userdeck.net/g/' . $guides_key . '/';
 
@@ -460,10 +456,11 @@ class UserDeck {
 			}
 
 			$request = wp_remote_get( $base_uri . $path );
+			$status = wp_remote_retrieve_response_code( $request );
 			$content = '';
 			$body = '';
-
-			if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
+			
+			if ( $status == 200 ) {
 				$content = wp_remote_retrieve_body( $request );
 			}
 
@@ -486,6 +483,24 @@ class UserDeck {
 		}
 		
 		return $content;
+		
+	}
+	
+	public function is_escaped_fragment_request() {
+		
+		return isset( $_GET['_escaped_fragment_'] );
+		
+	}
+	
+	public function escaped_fragment_path() {
+		
+		$path = '';
+		
+		if ( $_GET['_escaped_fragment_'] ) {
+			$path = $_GET['_escaped_fragment_'][0] == '/' ? substr( $_GET['_escaped_fragment_'], 1 ) : $_GET['_escaped_fragment_'];
+		}
+		
+		return $path;
 		
 	}
 	
