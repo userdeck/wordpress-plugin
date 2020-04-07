@@ -471,7 +471,7 @@ class UserDeck {
                 $body = $content;
             }
             
-            $content = strstr($body, '<div class="content">');
+            $content = strstr($body, '<div id="content">');
             $content = str_replace('/g/'.$guides_key.'/', get_permalink().'#!', $content);
 
         }
