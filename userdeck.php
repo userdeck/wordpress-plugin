@@ -253,7 +253,9 @@ class UserDeck {
         
         $sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
 
-        $request = wp_remote_get( $sitemap_url );
+        $request = wp_remote_get( $sitemap_url, array(
+            'redirection' => 0,
+        ));
 
         $sitemap = '';
 
@@ -286,7 +288,9 @@ class UserDeck {
 
         $sitemap_url = 'https://userdeck.net/g/' . $guides_key . '/sitemap.xml';
 
-        $request = wp_remote_get( $sitemap_url );
+        $request = wp_remote_get( $sitemap_url, array(
+            'redirection' => 0,
+        ));
 
         $sitemap = '';
 
@@ -455,7 +459,9 @@ class UserDeck {
                 $base_uri = untrailingslashit( $base_uri );
             }
 
-            $request = wp_remote_get( $base_uri . $path );
+            $request = wp_remote_get( $base_uri . $path, array(
+                'redirection' => 0,
+            ));
             $status = wp_remote_retrieve_response_code( $request );
             $content = '';
             $body = '';
