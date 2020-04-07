@@ -9,8 +9,8 @@ var UserDeck = {
         else {
             start = 'install/' + start;
         }
-
-        var url = 'https://app.userdeck.com/' + type + '?redir=' + start;
+        
+        var url = 'https://app.userdeck.com/' + start + '?type=' + type;
         var iframe = jQuery('<iframe id="iframe-connect" src="' + url + '" width="400" height="600" frameborder="0" ALLOWTRANSPARENCY="true"></iframe>');
 
         wrapper.append(iframe);
