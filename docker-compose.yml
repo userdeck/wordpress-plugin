@@ -1,0 +1,50 @@
+version: '3.3'
+
+services:
+  wordpress:
+    image: "wordpress:php7.3-apache"
+    depends_on:
+      - db
+    ports:
+      - 8026:80
+    volumes:
+    - wp:/var/www/html:rw
+    - .:/var/www/html/wp-content/plugins/userdeck:ro
+    restart: always
+    environment:
+      VIRTUAL_HOST: "udplugin.test"
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+       
+  wp-cli:
+    image: "wordpress:cli-php7.3"
+    depends_on:
+      - db
+    volumes:
+      - wp:/var/www/html:rw
+      - ./bin/install-wp.sh:/usr/local/bin/install-wp:ro
+      - .:/var/www/html/wp-content/plugins/userdeck:ro
+    environment:
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+       
+  db:
+    image: mysql:5.7
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+volumes:
+  wp: {}
+  db: {}
