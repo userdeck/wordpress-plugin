@@ -1,9 +1,10 @@
 === UserDeck Customer Support ===
-Contributors: userdeck
+Contributors: 99robots, charliepatel, userdeck
 Tags: userdeck, customer support, customer service, help, support, helpdesk, help desk, ticket, ticketing, knowledge base, knowledgebase, faq, frequently asked questions, documentation, docs, answers, widgets, zendesk
-Requires at least: 3.7
-Tested up to: 5.4
-Stable tag: 1.1.7
+Requires at least: 4.9
+Requires PHP: 5.6.20
+Tested up to: 5.8.2
+Stable tag: 1.1.8
 
 Easily integrate UserDeck's embedded support software into your WordPress website.
 
@@ -50,6 +51,9 @@ This section describes how to install the plugin and get it working.
 
 == Upgrade Notice ==
 
+= 1.1.8 =
+* UPDATED: Compatibility with WordPress 5.8.2
+
 = 1.1.7 =
 Fixed escaped fragment support after site changes.
 Improved escaped fragment parsing of guide seo content.
@@ -91,6 +95,9 @@ Switched to using post meta for attaching Guides to pages and sitemap integratio
 Added automated SEO support for Guide pages.
 
 == Changelog ==
+
+= 1.1.8 =
+* UPDATED: Compatibility with WordPress 5.8.2
 
 = 1.1.7 =
 * Fixed escaped fragment support after site changes
